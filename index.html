@@ -1,5 +1,154 @@
-MINIJOY AI
-Create. Imagine. Inspire.
 
-Your Imagination.
-Powered by AI.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINIJOY AI — Create Without Limits</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Arial,sans-serif;
+background:#090d1c;color:white;
+min-height:100vh;
+}
+header{
+display:flex;justify-content:space-between;
+align-items:center;padding:22px 7%;
+border-bottom:1px solid #252b42;
+}
+.logo{font-size:25px;font-weight:900;color:#8b7cff}
+nav a{color:#ddd;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{text-align:center;padding:100px 20px 65px}
+.tag{
+display:inline-block;padding:10px 18px;
+border:1px solid #6556bd;border-radius:30px;
+color:#b6aaff;font-size:13px;margin-bottom:25px
+}
+h1{font-size:clamp(42px,8vw,76px);line-height:1.1}
+h1 span{color:#9b85ff}
+.hero p{
+color:#aab1c8;font-size:18px;
+max-width:600px;margin:25px auto;line-height:1.7
+}
+.btn{
+display:inline-block;padding:16px 28px;
+border-radius:12px;background:#8067ff;
+color:white;text-decoration:none;font-weight:bold;
+border:0;cursor:pointer;font-size:16px
+}
+.btn:hover{background:#a18cff}
+section{padding:65px 7%;text-align:center}
+h2{font-size:34px;margin-bottom:15px}
+.sub{color:#aab1c8;margin-bottom:40px}
+.cards{
+display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;max-width:1050px;margin:auto
+}
+.card{
+background:#151b30;border:1px solid #29314e;
+padding:30px 22px;border-radius:18px;text-align:left
+}
+.card .icon{font-size:35px}
+.card h3{margin:18px 0 12px}
+.card p{color:#aab1c8;line-height:1.6;font-size:14px}
+.generator{
+max-width:700px;margin:35px auto;
+padding:25px;background:#151b30;
+border:1px solid #343c60;border-radius:18px
+}
+textarea{
+width:100%;height:110px;padding:16px;
+border-radius:12px;border:1px solid #414968;
+background:#090d1c;color:white;
+font-size:16px;resize:vertical;margin-bottom:18px
+}
+#message{color:#b6aaff;margin-top:15px}
+footer{
+text-align:center;padding:35px;
+border-top:1px solid #252b42;
+color:#8e96ad;font-size:13px
+}
+@media(max-width:600px){
+nav a{margin-left:9px;font-size:12px}
+header{padding:18px 5%}
+.hero{padding-top:75px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">✦ MINIJOY AI</div>
+<nav>
+<a href="#features">Features</a>
+<a href="#create">Create</a>
+</nav>
+</header>
+
+<main>
+<div class="hero">
+<div class="tag">✦ YOUR AI CREATIVE STUDIO</div>
+<h1>Create. Imagine.<br><span>Inspire.</span></h1>
+<p>Turn your imagination into reality.
+Create amazing AI videos, animated films and
+beautiful images with MINIJOY AI.</p>
+<a class="btn" href="#create">Start Creating →</a>
+</div>
+
+<section id="features">
+<h2>Everything Starts With Imagination</h2>
+<p class="sub">One platform. Endless possibilities.</p>
+<div class="cards">
+<div class="card">
+<div class="icon">🎬</div>
+<h3>AI Video Studio</h3>
+<p>Bring your ideas to life with AI-powered video creation.</p>
+</div>
+<div class="card">
+<div class="icon">🎨</div>
+<h3>AI Image Generator</h3>
+<p>Create stunning images from your imagination.</p>
+</div>
+<div class="card">
+<div class="icon">🧸</div>
+<h3>AI Animation</h3>
+<p>Create wonderful animated stories and cartoon adventures.</p>
+</div>
+<div class="card">
+<div class="icon">🚀</div>
+<h3>Sales AI</h3>
+<p>Discover opportunities and find potential customers.</p>
+</div>
+</div>
+</section>
+
+<section id="create">
+<h2>Start Your Creation</h2>
+<p class="sub">Describe what you want to create.</p>
+<div class="generator">
+<textarea id="prompt" placeholder="Describe your dream video or image..."></textarea>
+<button class="btn" onclick="createIdea()">Create With AI ✨</button>
+<p id="message"></p>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="logo">✦ MINIJOY AI</div>
+<p style="margin-top:12px">Your Imagination. Powered by AI.</p>
+<p style="margin-top:12px">© 2026 MINIJOY AI. All rights reserved.</p>
+</footer>
+
+<script>
+function createIdea(){
+const p=document.getElementById('prompt').value.trim();
+const m=document.getElementById('message');
+if(!p){
+m.textContent="Please describe your idea first.";
+return;
+}
+m.textContent="Your idea is ready! AI generation will be connected in the next stage.";
+}
+</script>
+</body>
+</html>
