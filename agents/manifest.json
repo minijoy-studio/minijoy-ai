@@ -1,0 +1,16 @@
+{
+  "product": "MINIJOY AI",
+  "version": "1.0.0",
+  "status": "architecture-defined",
+  "agents": [
+    {"id":"developer","name":"Developer AI","role":"Platform development","responsibilities":["code preparation","API diagnostics","bug analysis"],"requires":["LLM provider credentials"]},
+    {"id":"director","name":"Director AI","role":"Film and animation creation","responsibilities":["story outlines","scene breakdowns","video prompts","video generation handoff"],"requires":["FAL_API_KEY"]},
+    {"id":"sales","name":"Sales AI","role":"Customer acquisition and sales support","responsibilities":["lead qualification","sales drafts","customer response drafts"],"requires":["LLM provider credentials","approved customer data source"]},
+    {"id":"operator","name":"Operator AI","role":"Workflow coordination","responsibilities":["task intake","agent routing","status reporting"],"requires":["LLM provider credentials","workflow runtime"]}
+  ],
+  "security": {
+    "providerKeysServerSideOnly": true,
+    "externalActionsRequireExplicitAuthorization": true
+  },
+  "note": "Architecture definition only; agents are not deployed or operational yet."
+}
