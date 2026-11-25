@@ -1,0 +1,2064 @@
+{
+  "product": "FLIXO 1000 AI",
+  "version": "1.0.0",
+  "status": "100_direction_taxonomy_blueprint_only_not_deployed",
+  "description": "100 service directions worldwide: 10 specialist divisions multiplied by 10 customer market segments. Each direction is assigned 10 specialist role blueprints, for 1,000 total role assignments.",
+  "directionCount": 100,
+  "agentsPerDirection": 10,
+  "totalRoleAssignments": 1000,
+  "divisions": [
+    {
+      "id": "video",
+      "name": "Video & Animation",
+      "directionCount": 10
+    },
+    {
+      "id": "sales",
+      "name": "Global Sales & Customer Acquisition",
+      "directionCount": 10
+    },
+    {
+      "id": "design",
+      "name": "Graphic Design & Advertising",
+      "directionCount": 10
+    },
+    {
+      "id": "social",
+      "name": "Social Media & Publishing",
+      "directionCount": 10
+    },
+    {
+      "id": "ecommerce",
+      "name": "E-commerce & Online Stores",
+      "directionCount": 10
+    },
+    {
+      "id": "writing",
+      "name": "Writing & Documentation",
+      "directionCount": 10
+    },
+    {
+      "id": "translation",
+      "name": "Translation & Localization",
+      "directionCount": 10
+    },
+    {
+      "id": "education",
+      "name": "Education & Learning",
+      "directionCount": 10
+    },
+    {
+      "id": "audio",
+      "name": "Audio & Voice Services",
+      "directionCount": 10
+    },
+    {
+      "id": "webops",
+      "name": "Websites, Analytics & Operations",
+      "directionCount": 10
+    }
+  ],
+  "directions": [
+    {
+      "id": "video-local-small-business",
+      "name": "Video & Animation — Local Small Business",
+      "division": "video",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "video-001",
+        "video-011",
+        "video-021",
+        "video-031",
+        "video-041",
+        "video-051",
+        "video-061",
+        "video-071",
+        "video-081",
+        "video-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-restaurants-cafes",
+      "name": "Video & Animation — Restaurants & Cafes",
+      "division": "video",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "video-002",
+        "video-012",
+        "video-022",
+        "video-032",
+        "video-042",
+        "video-052",
+        "video-062",
+        "video-072",
+        "video-082",
+        "video-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-retail-e-commerce",
+      "name": "Video & Animation — Retail & E-commerce",
+      "division": "video",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "video-003",
+        "video-013",
+        "video-023",
+        "video-033",
+        "video-043",
+        "video-053",
+        "video-063",
+        "video-073",
+        "video-083",
+        "video-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-real-estate",
+      "name": "Video & Animation — Real Estate",
+      "division": "video",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "video-004",
+        "video-014",
+        "video-024",
+        "video-034",
+        "video-044",
+        "video-054",
+        "video-064",
+        "video-074",
+        "video-084",
+        "video-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-travel-hospitality",
+      "name": "Video & Animation — Travel & Hospitality",
+      "division": "video",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "video-005",
+        "video-015",
+        "video-025",
+        "video-035",
+        "video-045",
+        "video-055",
+        "video-065",
+        "video-075",
+        "video-085",
+        "video-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-education-providers",
+      "name": "Video & Animation — Education Providers",
+      "division": "video",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "video-006",
+        "video-016",
+        "video-026",
+        "video-036",
+        "video-046",
+        "video-056",
+        "video-066",
+        "video-076",
+        "video-086",
+        "video-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-health-wellness-businesses",
+      "name": "Video & Animation — Health & Wellness Businesses",
+      "division": "video",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "video-007",
+        "video-017",
+        "video-027",
+        "video-037",
+        "video-047",
+        "video-057",
+        "video-067",
+        "video-077",
+        "video-087",
+        "video-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-creators-influencers",
+      "name": "Video & Animation — Creators & Influencers",
+      "division": "video",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "video-008",
+        "video-018",
+        "video-028",
+        "video-038",
+        "video-048",
+        "video-058",
+        "video-068",
+        "video-078",
+        "video-088",
+        "video-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-professional-services",
+      "name": "Video & Animation — Professional Services",
+      "division": "video",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "video-009",
+        "video-019",
+        "video-029",
+        "video-039",
+        "video-049",
+        "video-059",
+        "video-069",
+        "video-079",
+        "video-089",
+        "video-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "video-nonprofits-community-groups",
+      "name": "Video & Animation — Nonprofits & Community Groups",
+      "division": "video",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "video-010",
+        "video-020",
+        "video-030",
+        "video-040",
+        "video-050",
+        "video-060",
+        "video-070",
+        "video-080",
+        "video-090",
+        "video-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-local-small-business",
+      "name": "Global Sales & Customer Acquisition — Local Small Business",
+      "division": "sales",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-001",
+        "sales-011",
+        "sales-021",
+        "sales-031",
+        "sales-041",
+        "sales-051",
+        "sales-061",
+        "sales-071",
+        "sales-081",
+        "sales-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-restaurants-cafes",
+      "name": "Global Sales & Customer Acquisition — Restaurants & Cafes",
+      "division": "sales",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-002",
+        "sales-012",
+        "sales-022",
+        "sales-032",
+        "sales-042",
+        "sales-052",
+        "sales-062",
+        "sales-072",
+        "sales-082",
+        "sales-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-retail-e-commerce",
+      "name": "Global Sales & Customer Acquisition — Retail & E-commerce",
+      "division": "sales",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-003",
+        "sales-013",
+        "sales-023",
+        "sales-033",
+        "sales-043",
+        "sales-053",
+        "sales-063",
+        "sales-073",
+        "sales-083",
+        "sales-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-real-estate",
+      "name": "Global Sales & Customer Acquisition — Real Estate",
+      "division": "sales",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-004",
+        "sales-014",
+        "sales-024",
+        "sales-034",
+        "sales-044",
+        "sales-054",
+        "sales-064",
+        "sales-074",
+        "sales-084",
+        "sales-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-travel-hospitality",
+      "name": "Global Sales & Customer Acquisition — Travel & Hospitality",
+      "division": "sales",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-005",
+        "sales-015",
+        "sales-025",
+        "sales-035",
+        "sales-045",
+        "sales-055",
+        "sales-065",
+        "sales-075",
+        "sales-085",
+        "sales-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-education-providers",
+      "name": "Global Sales & Customer Acquisition — Education Providers",
+      "division": "sales",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-006",
+        "sales-016",
+        "sales-026",
+        "sales-036",
+        "sales-046",
+        "sales-056",
+        "sales-066",
+        "sales-076",
+        "sales-086",
+        "sales-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-health-wellness-businesses",
+      "name": "Global Sales & Customer Acquisition — Health & Wellness Businesses",
+      "division": "sales",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-007",
+        "sales-017",
+        "sales-027",
+        "sales-037",
+        "sales-047",
+        "sales-057",
+        "sales-067",
+        "sales-077",
+        "sales-087",
+        "sales-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-creators-influencers",
+      "name": "Global Sales & Customer Acquisition — Creators & Influencers",
+      "division": "sales",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-008",
+        "sales-018",
+        "sales-028",
+        "sales-038",
+        "sales-048",
+        "sales-058",
+        "sales-068",
+        "sales-078",
+        "sales-088",
+        "sales-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-professional-services",
+      "name": "Global Sales & Customer Acquisition — Professional Services",
+      "division": "sales",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-009",
+        "sales-019",
+        "sales-029",
+        "sales-039",
+        "sales-049",
+        "sales-059",
+        "sales-069",
+        "sales-079",
+        "sales-089",
+        "sales-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "sales-nonprofits-community-groups",
+      "name": "Global Sales & Customer Acquisition — Nonprofits & Community Groups",
+      "division": "sales",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "sales-010",
+        "sales-020",
+        "sales-030",
+        "sales-040",
+        "sales-050",
+        "sales-060",
+        "sales-070",
+        "sales-080",
+        "sales-090",
+        "sales-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-local-small-business",
+      "name": "Graphic Design & Advertising — Local Small Business",
+      "division": "design",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "design-001",
+        "design-011",
+        "design-021",
+        "design-031",
+        "design-041",
+        "design-051",
+        "design-061",
+        "design-071",
+        "design-081",
+        "design-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-restaurants-cafes",
+      "name": "Graphic Design & Advertising — Restaurants & Cafes",
+      "division": "design",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "design-002",
+        "design-012",
+        "design-022",
+        "design-032",
+        "design-042",
+        "design-052",
+        "design-062",
+        "design-072",
+        "design-082",
+        "design-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-retail-e-commerce",
+      "name": "Graphic Design & Advertising — Retail & E-commerce",
+      "division": "design",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "design-003",
+        "design-013",
+        "design-023",
+        "design-033",
+        "design-043",
+        "design-053",
+        "design-063",
+        "design-073",
+        "design-083",
+        "design-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-real-estate",
+      "name": "Graphic Design & Advertising — Real Estate",
+      "division": "design",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "design-004",
+        "design-014",
+        "design-024",
+        "design-034",
+        "design-044",
+        "design-054",
+        "design-064",
+        "design-074",
+        "design-084",
+        "design-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-travel-hospitality",
+      "name": "Graphic Design & Advertising — Travel & Hospitality",
+      "division": "design",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "design-005",
+        "design-015",
+        "design-025",
+        "design-035",
+        "design-045",
+        "design-055",
+        "design-065",
+        "design-075",
+        "design-085",
+        "design-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-education-providers",
+      "name": "Graphic Design & Advertising — Education Providers",
+      "division": "design",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "design-006",
+        "design-016",
+        "design-026",
+        "design-036",
+        "design-046",
+        "design-056",
+        "design-066",
+        "design-076",
+        "design-086",
+        "design-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-health-wellness-businesses",
+      "name": "Graphic Design & Advertising — Health & Wellness Businesses",
+      "division": "design",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "design-007",
+        "design-017",
+        "design-027",
+        "design-037",
+        "design-047",
+        "design-057",
+        "design-067",
+        "design-077",
+        "design-087",
+        "design-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-creators-influencers",
+      "name": "Graphic Design & Advertising — Creators & Influencers",
+      "division": "design",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "design-008",
+        "design-018",
+        "design-028",
+        "design-038",
+        "design-048",
+        "design-058",
+        "design-068",
+        "design-078",
+        "design-088",
+        "design-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-professional-services",
+      "name": "Graphic Design & Advertising — Professional Services",
+      "division": "design",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "design-009",
+        "design-019",
+        "design-029",
+        "design-039",
+        "design-049",
+        "design-059",
+        "design-069",
+        "design-079",
+        "design-089",
+        "design-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "design-nonprofits-community-groups",
+      "name": "Graphic Design & Advertising — Nonprofits & Community Groups",
+      "division": "design",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "design-010",
+        "design-020",
+        "design-030",
+        "design-040",
+        "design-050",
+        "design-060",
+        "design-070",
+        "design-080",
+        "design-090",
+        "design-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-local-small-business",
+      "name": "Social Media & Publishing — Local Small Business",
+      "division": "social",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "social-001",
+        "social-011",
+        "social-021",
+        "social-031",
+        "social-041",
+        "social-051",
+        "social-061",
+        "social-071",
+        "social-081",
+        "social-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-restaurants-cafes",
+      "name": "Social Media & Publishing — Restaurants & Cafes",
+      "division": "social",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "social-002",
+        "social-012",
+        "social-022",
+        "social-032",
+        "social-042",
+        "social-052",
+        "social-062",
+        "social-072",
+        "social-082",
+        "social-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-retail-e-commerce",
+      "name": "Social Media & Publishing — Retail & E-commerce",
+      "division": "social",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "social-003",
+        "social-013",
+        "social-023",
+        "social-033",
+        "social-043",
+        "social-053",
+        "social-063",
+        "social-073",
+        "social-083",
+        "social-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-real-estate",
+      "name": "Social Media & Publishing — Real Estate",
+      "division": "social",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "social-004",
+        "social-014",
+        "social-024",
+        "social-034",
+        "social-044",
+        "social-054",
+        "social-064",
+        "social-074",
+        "social-084",
+        "social-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-travel-hospitality",
+      "name": "Social Media & Publishing — Travel & Hospitality",
+      "division": "social",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "social-005",
+        "social-015",
+        "social-025",
+        "social-035",
+        "social-045",
+        "social-055",
+        "social-065",
+        "social-075",
+        "social-085",
+        "social-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-education-providers",
+      "name": "Social Media & Publishing — Education Providers",
+      "division": "social",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "social-006",
+        "social-016",
+        "social-026",
+        "social-036",
+        "social-046",
+        "social-056",
+        "social-066",
+        "social-076",
+        "social-086",
+        "social-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-health-wellness-businesses",
+      "name": "Social Media & Publishing — Health & Wellness Businesses",
+      "division": "social",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "social-007",
+        "social-017",
+        "social-027",
+        "social-037",
+        "social-047",
+        "social-057",
+        "social-067",
+        "social-077",
+        "social-087",
+        "social-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-creators-influencers",
+      "name": "Social Media & Publishing — Creators & Influencers",
+      "division": "social",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "social-008",
+        "social-018",
+        "social-028",
+        "social-038",
+        "social-048",
+        "social-058",
+        "social-068",
+        "social-078",
+        "social-088",
+        "social-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-professional-services",
+      "name": "Social Media & Publishing — Professional Services",
+      "division": "social",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "social-009",
+        "social-019",
+        "social-029",
+        "social-039",
+        "social-049",
+        "social-059",
+        "social-069",
+        "social-079",
+        "social-089",
+        "social-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "social-nonprofits-community-groups",
+      "name": "Social Media & Publishing — Nonprofits & Community Groups",
+      "division": "social",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "social-010",
+        "social-020",
+        "social-030",
+        "social-040",
+        "social-050",
+        "social-060",
+        "social-070",
+        "social-080",
+        "social-090",
+        "social-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-local-small-business",
+      "name": "E-commerce & Online Stores — Local Small Business",
+      "division": "ecommerce",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-001",
+        "ecommerce-011",
+        "ecommerce-021",
+        "ecommerce-031",
+        "ecommerce-041",
+        "ecommerce-051",
+        "ecommerce-061",
+        "ecommerce-071",
+        "ecommerce-081",
+        "ecommerce-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-restaurants-cafes",
+      "name": "E-commerce & Online Stores — Restaurants & Cafes",
+      "division": "ecommerce",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-002",
+        "ecommerce-012",
+        "ecommerce-022",
+        "ecommerce-032",
+        "ecommerce-042",
+        "ecommerce-052",
+        "ecommerce-062",
+        "ecommerce-072",
+        "ecommerce-082",
+        "ecommerce-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-retail-e-commerce",
+      "name": "E-commerce & Online Stores — Retail & E-commerce",
+      "division": "ecommerce",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-003",
+        "ecommerce-013",
+        "ecommerce-023",
+        "ecommerce-033",
+        "ecommerce-043",
+        "ecommerce-053",
+        "ecommerce-063",
+        "ecommerce-073",
+        "ecommerce-083",
+        "ecommerce-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-real-estate",
+      "name": "E-commerce & Online Stores — Real Estate",
+      "division": "ecommerce",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-004",
+        "ecommerce-014",
+        "ecommerce-024",
+        "ecommerce-034",
+        "ecommerce-044",
+        "ecommerce-054",
+        "ecommerce-064",
+        "ecommerce-074",
+        "ecommerce-084",
+        "ecommerce-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-travel-hospitality",
+      "name": "E-commerce & Online Stores — Travel & Hospitality",
+      "division": "ecommerce",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-005",
+        "ecommerce-015",
+        "ecommerce-025",
+        "ecommerce-035",
+        "ecommerce-045",
+        "ecommerce-055",
+        "ecommerce-065",
+        "ecommerce-075",
+        "ecommerce-085",
+        "ecommerce-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-education-providers",
+      "name": "E-commerce & Online Stores — Education Providers",
+      "division": "ecommerce",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-006",
+        "ecommerce-016",
+        "ecommerce-026",
+        "ecommerce-036",
+        "ecommerce-046",
+        "ecommerce-056",
+        "ecommerce-066",
+        "ecommerce-076",
+        "ecommerce-086",
+        "ecommerce-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-health-wellness-businesses",
+      "name": "E-commerce & Online Stores — Health & Wellness Businesses",
+      "division": "ecommerce",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-007",
+        "ecommerce-017",
+        "ecommerce-027",
+        "ecommerce-037",
+        "ecommerce-047",
+        "ecommerce-057",
+        "ecommerce-067",
+        "ecommerce-077",
+        "ecommerce-087",
+        "ecommerce-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-creators-influencers",
+      "name": "E-commerce & Online Stores — Creators & Influencers",
+      "division": "ecommerce",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-008",
+        "ecommerce-018",
+        "ecommerce-028",
+        "ecommerce-038",
+        "ecommerce-048",
+        "ecommerce-058",
+        "ecommerce-068",
+        "ecommerce-078",
+        "ecommerce-088",
+        "ecommerce-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-professional-services",
+      "name": "E-commerce & Online Stores — Professional Services",
+      "division": "ecommerce",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-009",
+        "ecommerce-019",
+        "ecommerce-029",
+        "ecommerce-039",
+        "ecommerce-049",
+        "ecommerce-059",
+        "ecommerce-069",
+        "ecommerce-079",
+        "ecommerce-089",
+        "ecommerce-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "ecommerce-nonprofits-community-groups",
+      "name": "E-commerce & Online Stores — Nonprofits & Community Groups",
+      "division": "ecommerce",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "ecommerce-010",
+        "ecommerce-020",
+        "ecommerce-030",
+        "ecommerce-040",
+        "ecommerce-050",
+        "ecommerce-060",
+        "ecommerce-070",
+        "ecommerce-080",
+        "ecommerce-090",
+        "ecommerce-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-local-small-business",
+      "name": "Writing & Documentation — Local Small Business",
+      "division": "writing",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-001",
+        "writing-011",
+        "writing-021",
+        "writing-031",
+        "writing-041",
+        "writing-051",
+        "writing-061",
+        "writing-071",
+        "writing-081",
+        "writing-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-restaurants-cafes",
+      "name": "Writing & Documentation — Restaurants & Cafes",
+      "division": "writing",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-002",
+        "writing-012",
+        "writing-022",
+        "writing-032",
+        "writing-042",
+        "writing-052",
+        "writing-062",
+        "writing-072",
+        "writing-082",
+        "writing-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-retail-e-commerce",
+      "name": "Writing & Documentation — Retail & E-commerce",
+      "division": "writing",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-003",
+        "writing-013",
+        "writing-023",
+        "writing-033",
+        "writing-043",
+        "writing-053",
+        "writing-063",
+        "writing-073",
+        "writing-083",
+        "writing-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-real-estate",
+      "name": "Writing & Documentation — Real Estate",
+      "division": "writing",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-004",
+        "writing-014",
+        "writing-024",
+        "writing-034",
+        "writing-044",
+        "writing-054",
+        "writing-064",
+        "writing-074",
+        "writing-084",
+        "writing-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-travel-hospitality",
+      "name": "Writing & Documentation — Travel & Hospitality",
+      "division": "writing",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-005",
+        "writing-015",
+        "writing-025",
+        "writing-035",
+        "writing-045",
+        "writing-055",
+        "writing-065",
+        "writing-075",
+        "writing-085",
+        "writing-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-education-providers",
+      "name": "Writing & Documentation — Education Providers",
+      "division": "writing",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-006",
+        "writing-016",
+        "writing-026",
+        "writing-036",
+        "writing-046",
+        "writing-056",
+        "writing-066",
+        "writing-076",
+        "writing-086",
+        "writing-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-health-wellness-businesses",
+      "name": "Writing & Documentation — Health & Wellness Businesses",
+      "division": "writing",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-007",
+        "writing-017",
+        "writing-027",
+        "writing-037",
+        "writing-047",
+        "writing-057",
+        "writing-067",
+        "writing-077",
+        "writing-087",
+        "writing-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-creators-influencers",
+      "name": "Writing & Documentation — Creators & Influencers",
+      "division": "writing",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-008",
+        "writing-018",
+        "writing-028",
+        "writing-038",
+        "writing-048",
+        "writing-058",
+        "writing-068",
+        "writing-078",
+        "writing-088",
+        "writing-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-professional-services",
+      "name": "Writing & Documentation — Professional Services",
+      "division": "writing",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-009",
+        "writing-019",
+        "writing-029",
+        "writing-039",
+        "writing-049",
+        "writing-059",
+        "writing-069",
+        "writing-079",
+        "writing-089",
+        "writing-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "writing-nonprofits-community-groups",
+      "name": "Writing & Documentation — Nonprofits & Community Groups",
+      "division": "writing",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "writing-010",
+        "writing-020",
+        "writing-030",
+        "writing-040",
+        "writing-050",
+        "writing-060",
+        "writing-070",
+        "writing-080",
+        "writing-090",
+        "writing-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-local-small-business",
+      "name": "Translation & Localization — Local Small Business",
+      "division": "translation",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-001",
+        "translation-011",
+        "translation-021",
+        "translation-031",
+        "translation-041",
+        "translation-051",
+        "translation-061",
+        "translation-071",
+        "translation-081",
+        "translation-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-restaurants-cafes",
+      "name": "Translation & Localization — Restaurants & Cafes",
+      "division": "translation",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-002",
+        "translation-012",
+        "translation-022",
+        "translation-032",
+        "translation-042",
+        "translation-052",
+        "translation-062",
+        "translation-072",
+        "translation-082",
+        "translation-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-retail-e-commerce",
+      "name": "Translation & Localization — Retail & E-commerce",
+      "division": "translation",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-003",
+        "translation-013",
+        "translation-023",
+        "translation-033",
+        "translation-043",
+        "translation-053",
+        "translation-063",
+        "translation-073",
+        "translation-083",
+        "translation-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-real-estate",
+      "name": "Translation & Localization — Real Estate",
+      "division": "translation",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-004",
+        "translation-014",
+        "translation-024",
+        "translation-034",
+        "translation-044",
+        "translation-054",
+        "translation-064",
+        "translation-074",
+        "translation-084",
+        "translation-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-travel-hospitality",
+      "name": "Translation & Localization — Travel & Hospitality",
+      "division": "translation",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-005",
+        "translation-015",
+        "translation-025",
+        "translation-035",
+        "translation-045",
+        "translation-055",
+        "translation-065",
+        "translation-075",
+        "translation-085",
+        "translation-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-education-providers",
+      "name": "Translation & Localization — Education Providers",
+      "division": "translation",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-006",
+        "translation-016",
+        "translation-026",
+        "translation-036",
+        "translation-046",
+        "translation-056",
+        "translation-066",
+        "translation-076",
+        "translation-086",
+        "translation-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-health-wellness-businesses",
+      "name": "Translation & Localization — Health & Wellness Businesses",
+      "division": "translation",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-007",
+        "translation-017",
+        "translation-027",
+        "translation-037",
+        "translation-047",
+        "translation-057",
+        "translation-067",
+        "translation-077",
+        "translation-087",
+        "translation-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-creators-influencers",
+      "name": "Translation & Localization — Creators & Influencers",
+      "division": "translation",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-008",
+        "translation-018",
+        "translation-028",
+        "translation-038",
+        "translation-048",
+        "translation-058",
+        "translation-068",
+        "translation-078",
+        "translation-088",
+        "translation-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-professional-services",
+      "name": "Translation & Localization — Professional Services",
+      "division": "translation",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-009",
+        "translation-019",
+        "translation-029",
+        "translation-039",
+        "translation-049",
+        "translation-059",
+        "translation-069",
+        "translation-079",
+        "translation-089",
+        "translation-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "translation-nonprofits-community-groups",
+      "name": "Translation & Localization — Nonprofits & Community Groups",
+      "division": "translation",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "translation-010",
+        "translation-020",
+        "translation-030",
+        "translation-040",
+        "translation-050",
+        "translation-060",
+        "translation-070",
+        "translation-080",
+        "translation-090",
+        "translation-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-local-small-business",
+      "name": "Education & Learning — Local Small Business",
+      "division": "education",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "education-001",
+        "education-011",
+        "education-021",
+        "education-031",
+        "education-041",
+        "education-051",
+        "education-061",
+        "education-071",
+        "education-081",
+        "education-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-restaurants-cafes",
+      "name": "Education & Learning — Restaurants & Cafes",
+      "division": "education",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "education-002",
+        "education-012",
+        "education-022",
+        "education-032",
+        "education-042",
+        "education-052",
+        "education-062",
+        "education-072",
+        "education-082",
+        "education-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-retail-e-commerce",
+      "name": "Education & Learning — Retail & E-commerce",
+      "division": "education",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "education-003",
+        "education-013",
+        "education-023",
+        "education-033",
+        "education-043",
+        "education-053",
+        "education-063",
+        "education-073",
+        "education-083",
+        "education-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-real-estate",
+      "name": "Education & Learning — Real Estate",
+      "division": "education",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "education-004",
+        "education-014",
+        "education-024",
+        "education-034",
+        "education-044",
+        "education-054",
+        "education-064",
+        "education-074",
+        "education-084",
+        "education-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-travel-hospitality",
+      "name": "Education & Learning — Travel & Hospitality",
+      "division": "education",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "education-005",
+        "education-015",
+        "education-025",
+        "education-035",
+        "education-045",
+        "education-055",
+        "education-065",
+        "education-075",
+        "education-085",
+        "education-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-education-providers",
+      "name": "Education & Learning — Education Providers",
+      "division": "education",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "education-006",
+        "education-016",
+        "education-026",
+        "education-036",
+        "education-046",
+        "education-056",
+        "education-066",
+        "education-076",
+        "education-086",
+        "education-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-health-wellness-businesses",
+      "name": "Education & Learning — Health & Wellness Businesses",
+      "division": "education",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "education-007",
+        "education-017",
+        "education-027",
+        "education-037",
+        "education-047",
+        "education-057",
+        "education-067",
+        "education-077",
+        "education-087",
+        "education-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-creators-influencers",
+      "name": "Education & Learning — Creators & Influencers",
+      "division": "education",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "education-008",
+        "education-018",
+        "education-028",
+        "education-038",
+        "education-048",
+        "education-058",
+        "education-068",
+        "education-078",
+        "education-088",
+        "education-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-professional-services",
+      "name": "Education & Learning — Professional Services",
+      "division": "education",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "education-009",
+        "education-019",
+        "education-029",
+        "education-039",
+        "education-049",
+        "education-059",
+        "education-069",
+        "education-079",
+        "education-089",
+        "education-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "education-nonprofits-community-groups",
+      "name": "Education & Learning — Nonprofits & Community Groups",
+      "division": "education",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "education-010",
+        "education-020",
+        "education-030",
+        "education-040",
+        "education-050",
+        "education-060",
+        "education-070",
+        "education-080",
+        "education-090",
+        "education-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-local-small-business",
+      "name": "Audio & Voice Services — Local Small Business",
+      "division": "audio",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-001",
+        "audio-011",
+        "audio-021",
+        "audio-031",
+        "audio-041",
+        "audio-051",
+        "audio-061",
+        "audio-071",
+        "audio-081",
+        "audio-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-restaurants-cafes",
+      "name": "Audio & Voice Services — Restaurants & Cafes",
+      "division": "audio",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-002",
+        "audio-012",
+        "audio-022",
+        "audio-032",
+        "audio-042",
+        "audio-052",
+        "audio-062",
+        "audio-072",
+        "audio-082",
+        "audio-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-retail-e-commerce",
+      "name": "Audio & Voice Services — Retail & E-commerce",
+      "division": "audio",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-003",
+        "audio-013",
+        "audio-023",
+        "audio-033",
+        "audio-043",
+        "audio-053",
+        "audio-063",
+        "audio-073",
+        "audio-083",
+        "audio-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-real-estate",
+      "name": "Audio & Voice Services — Real Estate",
+      "division": "audio",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-004",
+        "audio-014",
+        "audio-024",
+        "audio-034",
+        "audio-044",
+        "audio-054",
+        "audio-064",
+        "audio-074",
+        "audio-084",
+        "audio-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-travel-hospitality",
+      "name": "Audio & Voice Services — Travel & Hospitality",
+      "division": "audio",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-005",
+        "audio-015",
+        "audio-025",
+        "audio-035",
+        "audio-045",
+        "audio-055",
+        "audio-065",
+        "audio-075",
+        "audio-085",
+        "audio-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-education-providers",
+      "name": "Audio & Voice Services — Education Providers",
+      "division": "audio",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-006",
+        "audio-016",
+        "audio-026",
+        "audio-036",
+        "audio-046",
+        "audio-056",
+        "audio-066",
+        "audio-076",
+        "audio-086",
+        "audio-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-health-wellness-businesses",
+      "name": "Audio & Voice Services — Health & Wellness Businesses",
+      "division": "audio",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-007",
+        "audio-017",
+        "audio-027",
+        "audio-037",
+        "audio-047",
+        "audio-057",
+        "audio-067",
+        "audio-077",
+        "audio-087",
+        "audio-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-creators-influencers",
+      "name": "Audio & Voice Services — Creators & Influencers",
+      "division": "audio",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-008",
+        "audio-018",
+        "audio-028",
+        "audio-038",
+        "audio-048",
+        "audio-058",
+        "audio-068",
+        "audio-078",
+        "audio-088",
+        "audio-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-professional-services",
+      "name": "Audio & Voice Services — Professional Services",
+      "division": "audio",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-009",
+        "audio-019",
+        "audio-029",
+        "audio-039",
+        "audio-049",
+        "audio-059",
+        "audio-069",
+        "audio-079",
+        "audio-089",
+        "audio-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "audio-nonprofits-community-groups",
+      "name": "Audio & Voice Services — Nonprofits & Community Groups",
+      "division": "audio",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "audio-010",
+        "audio-020",
+        "audio-030",
+        "audio-040",
+        "audio-050",
+        "audio-060",
+        "audio-070",
+        "audio-080",
+        "audio-090",
+        "audio-100"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-local-small-business",
+      "name": "Websites, Analytics & Operations — Local Small Business",
+      "division": "webops",
+      "marketSegment": "Local Small Business",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-001",
+        "webops-011",
+        "webops-021",
+        "webops-031",
+        "webops-041",
+        "webops-051",
+        "webops-061",
+        "webops-071",
+        "webops-081",
+        "webops-091"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-restaurants-cafes",
+      "name": "Websites, Analytics & Operations — Restaurants & Cafes",
+      "division": "webops",
+      "marketSegment": "Restaurants & Cafes",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-002",
+        "webops-012",
+        "webops-022",
+        "webops-032",
+        "webops-042",
+        "webops-052",
+        "webops-062",
+        "webops-072",
+        "webops-082",
+        "webops-092"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-retail-e-commerce",
+      "name": "Websites, Analytics & Operations — Retail & E-commerce",
+      "division": "webops",
+      "marketSegment": "Retail & E-commerce",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-003",
+        "webops-013",
+        "webops-023",
+        "webops-033",
+        "webops-043",
+        "webops-053",
+        "webops-063",
+        "webops-073",
+        "webops-083",
+        "webops-093"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-real-estate",
+      "name": "Websites, Analytics & Operations — Real Estate",
+      "division": "webops",
+      "marketSegment": "Real Estate",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-004",
+        "webops-014",
+        "webops-024",
+        "webops-034",
+        "webops-044",
+        "webops-054",
+        "webops-064",
+        "webops-074",
+        "webops-084",
+        "webops-094"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-travel-hospitality",
+      "name": "Websites, Analytics & Operations — Travel & Hospitality",
+      "division": "webops",
+      "marketSegment": "Travel & Hospitality",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-005",
+        "webops-015",
+        "webops-025",
+        "webops-035",
+        "webops-045",
+        "webops-055",
+        "webops-065",
+        "webops-075",
+        "webops-085",
+        "webops-095"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-education-providers",
+      "name": "Websites, Analytics & Operations — Education Providers",
+      "division": "webops",
+      "marketSegment": "Education Providers",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-006",
+        "webops-016",
+        "webops-026",
+        "webops-036",
+        "webops-046",
+        "webops-056",
+        "webops-066",
+        "webops-076",
+        "webops-086",
+        "webops-096"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-health-wellness-businesses",
+      "name": "Websites, Analytics & Operations — Health & Wellness Businesses",
+      "division": "webops",
+      "marketSegment": "Health & Wellness Businesses",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-007",
+        "webops-017",
+        "webops-027",
+        "webops-037",
+        "webops-047",
+        "webops-057",
+        "webops-067",
+        "webops-077",
+        "webops-087",
+        "webops-097"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-creators-influencers",
+      "name": "Websites, Analytics & Operations — Creators & Influencers",
+      "division": "webops",
+      "marketSegment": "Creators & Influencers",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-008",
+        "webops-018",
+        "webops-028",
+        "webops-038",
+        "webops-048",
+        "webops-058",
+        "webops-068",
+        "webops-078",
+        "webops-088",
+        "webops-098"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-professional-services",
+      "name": "Websites, Analytics & Operations — Professional Services",
+      "division": "webops",
+      "marketSegment": "Professional Services",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-009",
+        "webops-019",
+        "webops-029",
+        "webops-039",
+        "webops-049",
+        "webops-059",
+        "webops-069",
+        "webops-079",
+        "webops-089",
+        "webops-099"
+      ],
+      "status": "planned_not_deployed"
+    },
+    {
+      "id": "webops-nonprofits-community-groups",
+      "name": "Websites, Analytics & Operations — Nonprofits & Community Groups",
+      "division": "webops",
+      "marketSegment": "Nonprofits & Community Groups",
+      "agentCount": 10,
+      "agentIds": [
+        "webops-010",
+        "webops-020",
+        "webops-030",
+        "webops-040",
+        "webops-050",
+        "webops-060",
+        "webops-070",
+        "webops-080",
+        "webops-090",
+        "webops-100"
+      ],
+      "status": "planned_not_deployed"
+    }
+  ],
+  "activationNote": "These are assignments of existing role blueprints, not 1,000 live autonomous agents. Runtime model connection, deployment, authentication, customer workflows, monitoring, and payment processing remain required."
+}
