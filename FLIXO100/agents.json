@@ -1,0 +1,735 @@
+{
+  "product": "FLIXO 100 AI",
+  "version": "0.1.0",
+  "status": "role_registry_only_not_deployed",
+  "description": "100 defined specialist roles grouped into five teams. These are role definitions, not 100 running autonomous AI instances.",
+  "teams": [
+    {
+      "id": "video",
+      "name": "Video & Animation",
+      "agentCount": 20
+    },
+    {
+      "id": "sales",
+      "name": "Customer Discovery & Sales",
+      "agentCount": 20
+    },
+    {
+      "id": "design",
+      "name": "Design & Advertising",
+      "agentCount": 20
+    },
+    {
+      "id": "social",
+      "name": "Content & Social Media",
+      "agentCount": 20
+    },
+    {
+      "id": "operations",
+      "name": "Operations, Finance & Risk",
+      "agentCount": 20
+    }
+  ],
+  "agents": [
+    {
+      "id": "video-01",
+      "team": "video",
+      "role": "Storyboard Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-02",
+      "team": "video",
+      "role": "Script Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-03",
+      "team": "video",
+      "role": "Scene Designer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-04",
+      "team": "video",
+      "role": "Prompt Engineer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-05",
+      "team": "video",
+      "role": "Character Consistency Checker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-06",
+      "team": "video",
+      "role": "Background Designer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-07",
+      "team": "video",
+      "role": "Animation Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-08",
+      "team": "video",
+      "role": "Voiceover Script Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-09",
+      "team": "video",
+      "role": "Subtitle Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-10",
+      "team": "video",
+      "role": "Short-Form Editor",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-11",
+      "team": "video",
+      "role": "Long-Form Editor",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-12",
+      "team": "video",
+      "role": "Trailer Creator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-13",
+      "team": "video",
+      "role": "Thumbnail Designer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-14",
+      "team": "video",
+      "role": "Sound Brief Creator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-15",
+      "team": "video",
+      "role": "Visual Quality Reviewer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-16",
+      "team": "video",
+      "role": "Continuity Checker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-17",
+      "team": "video",
+      "role": "Kids Content Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-18",
+      "team": "video",
+      "role": "Product Video Creator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-19",
+      "team": "video",
+      "role": "Export Checklist Agent",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "video-20",
+      "team": "video",
+      "role": "Video Delivery Coordinator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-01",
+      "team": "sales",
+      "role": "Lead Research Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-02",
+      "team": "sales",
+      "role": "Business Prospect Finder",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-03",
+      "team": "sales",
+      "role": "Local Business Segmenter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-04",
+      "team": "sales",
+      "role": "Creator Prospect Finder",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-05",
+      "team": "sales",
+      "role": "Lead Qualifier",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-06",
+      "team": "sales",
+      "role": "Offer Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-07",
+      "team": "sales",
+      "role": "Proposal Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-08",
+      "team": "sales",
+      "role": "Cold Email Drafter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-09",
+      "team": "sales",
+      "role": "DM Drafter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-10",
+      "team": "sales",
+      "role": "Follow-up Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-11",
+      "team": "sales",
+      "role": "Sales Call Brief Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-12",
+      "team": "sales",
+      "role": "Objection Handler",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-13",
+      "team": "sales",
+      "role": "Pricing Assistant",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-14",
+      "team": "sales",
+      "role": "Portfolio Matchmaker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-15",
+      "team": "sales",
+      "role": "CRM Note Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-16",
+      "team": "sales",
+      "role": "Customer Needs Analyst",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-17",
+      "team": "sales",
+      "role": "Referral Request Drafter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-18",
+      "team": "sales",
+      "role": "Renewal Reminder Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-19",
+      "team": "sales",
+      "role": "Sales Report Analyst",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "sales-20",
+      "team": "sales",
+      "role": "Client Onboarding Assistant",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-01",
+      "team": "design",
+      "role": "Brand Brief Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-02",
+      "team": "design",
+      "role": "Logo Brief Creator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-03",
+      "team": "design",
+      "role": "Banner Designer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-04",
+      "team": "design",
+      "role": "Social Ad Copywriter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-05",
+      "team": "design",
+      "role": "Campaign Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-06",
+      "team": "design",
+      "role": "Product Description Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-07",
+      "team": "design",
+      "role": "Landing Page Copywriter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-08",
+      "team": "design",
+      "role": "Call-to-Action Reviewer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-09",
+      "team": "design",
+      "role": "Ad Variant Generator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-10",
+      "team": "design",
+      "role": "Audience Persona Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-11",
+      "team": "design",
+      "role": "Brand Voice Checker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-12",
+      "team": "design",
+      "role": "Color Palette Advisor",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-13",
+      "team": "design",
+      "role": "Creative Brief Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-14",
+      "team": "design",
+      "role": "Poster Concept Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-15",
+      "team": "design",
+      "role": "Promo Script Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-16",
+      "team": "design",
+      "role": "Offer Positioning Analyst",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-17",
+      "team": "design",
+      "role": "Competitor Creative Reviewer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-18",
+      "team": "design",
+      "role": "A/B Test Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-19",
+      "team": "design",
+      "role": "Ad Compliance Checker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "design-20",
+      "team": "design",
+      "role": "Creative QA Reviewer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-01",
+      "team": "social",
+      "role": "YouTube Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-02",
+      "team": "social",
+      "role": "Instagram Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-03",
+      "team": "social",
+      "role": "TikTok Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-04",
+      "team": "social",
+      "role": "Content Calendar Manager",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-05",
+      "team": "social",
+      "role": "Shorts Hook Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-06",
+      "team": "social",
+      "role": "Caption Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-07",
+      "team": "social",
+      "role": "Hashtag Research Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-08",
+      "team": "social",
+      "role": "Community Reply Drafter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-09",
+      "team": "social",
+      "role": "Comment Moderator Assistant",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-10",
+      "team": "social",
+      "role": "Trend Research Analyst",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-11",
+      "team": "social",
+      "role": "Publishing Checklist Agent",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-12",
+      "team": "social",
+      "role": "Repurposing Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-13",
+      "team": "social",
+      "role": "Channel Description Writer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-14",
+      "team": "social",
+      "role": "Series Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-15",
+      "team": "social",
+      "role": "Audience Engagement Analyst",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-16",
+      "team": "social",
+      "role": "Content Performance Reporter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-17",
+      "team": "social",
+      "role": "Thumbnail Title Tester",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-18",
+      "team": "social",
+      "role": "Localization Assistant",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-19",
+      "team": "social",
+      "role": "Creator Collaboration Planner",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "social-20",
+      "team": "social",
+      "role": "Social QA Reviewer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-01",
+      "team": "operations",
+      "role": "Central Task Dispatcher",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-02",
+      "team": "operations",
+      "role": "Project Coordinator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-03",
+      "team": "operations",
+      "role": "Task Prioritizer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-04",
+      "team": "operations",
+      "role": "Deadline Tracker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-05",
+      "team": "operations",
+      "role": "Quality Gatekeeper",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-06",
+      "team": "operations",
+      "role": "Workflow Documenter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-07",
+      "team": "operations",
+      "role": "Cost Estimator",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-08",
+      "team": "operations",
+      "role": "Revenue Tracker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-09",
+      "team": "operations",
+      "role": "Expense Categorizer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-10",
+      "team": "operations",
+      "role": "Invoice Draft Assistant",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-11",
+      "team": "operations",
+      "role": "Payout Reconciliation Assistant",
+      "status": "planned",
+      "requiresHumanApproval": true
+    },
+    {
+      "id": "operations-12",
+      "team": "operations",
+      "role": "Crypto Risk Monitor",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-13",
+      "team": "operations",
+      "role": "Market Research Summarizer",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-14",
+      "team": "operations",
+      "role": "Fraud Signal Checker",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-15",
+      "team": "operations",
+      "role": "Security Checklist Agent",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-16",
+      "team": "operations",
+      "role": "Privacy Review Agent",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-17",
+      "team": "operations",
+      "role": "Customer Support Triage",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-18",
+      "team": "operations",
+      "role": "Incident Reporter",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-19",
+      "team": "operations",
+      "role": "Weekly Operations Analyst",
+      "status": "planned",
+      "requiresHumanApproval": false
+    },
+    {
+      "id": "operations-20",
+      "team": "operations",
+      "role": "Human Approval Gatekeeper",
+      "status": "planned",
+      "requiresHumanApproval": false
+    }
+  ]
+}
