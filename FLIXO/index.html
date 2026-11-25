@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09090d">
+<title>FLIXO AI — Cinematic Story Studio</title>
+<style>
+:root{color-scheme:dark;--bg:#09090d;--panel:#15151d;--line:#30303d;--muted:#aaa9b8;--gold:#e7b86b;--white:#f7f4ef}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#48301e 0,#17121a 35%,var(--bg) 72%);color:var(--white);font-family:Inter,Arial,sans-serif;min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 7%;border-bottom:1px solid #29232b;background:#09090ddd;position:sticky;top:0;backdrop-filter:blur(12px);z-index:5}
+.logo{font-weight:900;letter-spacing:3px;font-size:24px;color:var(--gold)}nav a{color:#ddd;text-decoration:none;margin-left:22px;font-size:14px}
+.hero{text-align:center;padding:100px 20px 75px}.eyebrow{color:var(--gold);letter-spacing:3px;font-size:12px;font-weight:700}h1{font-size:clamp(44px,8vw,82px);line-height:1.02;margin:20px 0}h1 span{color:var(--gold)}.hero p,.muted{color:var(--muted);line-height:1.7;max-width:680px;margin:20px auto}
+.btn{background:var(--gold);color:#17110b;border:0;border-radius:10px;padding:14px 22px;font-weight:800;cursor:pointer;font-size:15px}.btn:disabled{opacity:.55;cursor:not-allowed}
+section{padding:65px 7%;text-align:center}h2{font-size:32px;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;max-width:1050px;margin:35px auto}.tile,.studio{background:linear-gradient(145deg,#1b1a23,#111117);border:1px solid var(--line);border-radius:16px;padding:24px;text-align:left}.tile b{display:block;margin:12px 0}.tile p{color:var(--muted);font-size:14px;line-height:1.6}.studio{max-width:760px;margin:28px auto;padding:26px}label{display:block;text-align:left;color:#ddd;font-size:13px;margin:16px 0 8px}textarea,select,input{width:100%;background:#0b0b11;color:white;border:1px solid #3a3742;border-radius:10px;padding:13px;font:inherit}textarea{min-height:120px;resize:vertical}.note{font-size:13px;color:var(--muted);line-height:1.6;margin-top:16px}#status{color:var(--gold);margin-top:14px;min-height:24px}footer{text-align:center;border-top:1px solid #29232b;padding:30px;color:#888;font-size:13px}
+@media(max-width:600px){header{padding:16px 5%}nav a{margin-left:9px;font-size:12px}.hero{padding-top:70px}}
+</style>
+</head>
+<body>
+<header><div class="logo">FLIXO AI</div><nav><a href="#genres">Genres</a><a href="#studio">Studio</a></nav></header>
+<main>
+<div class="hero"><div class="eyebrow">YOUR CINEMATIC AI STUDIO</div><h1>Stories that<br><span>stay with you.</span></h1><p>Create cinematic concepts, trailers and story-driven films with FLIXO AI — from drama and mystery to romance and thriller.</p><a class="btn" href="#studio" style="display:inline-block;text-decoration:none">Enter the Studio</a></div>
+<section id="genres"><h2>Choose your story world</h2><p class="muted">A creative studio for original stories and cinematic content.</p><div class="grid">
+<div class="tile"><div>🎭</div><b>Drama</b><p>Emotional stories, powerful characters and meaningful endings.</p></div>
+<div class="tile"><div>🕵️</div><b>Detective & Mystery</b><p>Clues, suspense, secrets and unexpected reveals.</p></div>
+<div class="tile"><div>❤️</div><b>Romance</b><p>Love stories, human connections and heartfelt moments.</p></div>
+<div class="tile"><div>🌑</div><b>Thriller</b><p>Tension-filled scenes and cinematic suspense.</p></div>
+<div class="tile"><div>🎞️</div><b>Trailers & Shorts</b><p>Short promotional films and story teasers.</p></div>
+<div class="tile"><div>📖</div><b>Screenplays</b><p>Loglines, outlines, scene plans and dialogue drafts.</p></div>
+</div></section>
+<section id="studio"><h2>FLIXO Creative Studio</h2><p class="muted">Prepare your film concept. Live AI rendering will be enabled after secure backend authentication is connected.</p>
+<div class="studio">
+<label for="genre">Story genre</label><select id="genre"><option>Drama</option><option>Detective & Mystery</option><option>Romance</option><option>Thriller</option><option>Human story</option><option>Trailer / Short</option></select>
+<label for="duration">Target duration</label><select id="duration"><option value="30">30-minute story film</option><option value="5">5-minute short film</option><option value="1">Short trailer (up to 1 minute)</option></select>
+<label for="idea">Describe your story</label><textarea id="idea" placeholder="A small-town detective discovers a secret that changes everything..."></textarea>
+<button class="btn" id="prepare" type="button">Prepare my film concept</button>
+<div id="status" role="status" aria-live="polite"></div>
+<p class="note">This page currently prepares a creative brief only. It does not yet render or export a video, accept payments, or send your prompt to an AI provider. Do not enter private or sensitive information.</p>
+</div></section>
+</main>
+<footer><strong style="color:var(--gold);letter-spacing:3px">FLIXO AI</strong><p>Every second is a story.</p>© 2026 FLIXO AI</footer>
+<script>
+document.getElementById('prepare').addEventListener('click',()=>{
+ const idea=document.getElementById('idea').value.trim();
+ const status=document.getElementById('status');
+ if(!idea){status.textContent='Please describe your story first.';return;}
+ const genre=document.getElementById('genre').value;
+ const duration=document.getElementById('duration').selectedOptions[0].text;
+ status.textContent='Your '+genre+' concept is ready to plan ('+duration+'). Live AI video generation is not connected yet.';
+});
+</script>
+</body></html>
