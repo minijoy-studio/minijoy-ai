@@ -7,12 +7,14 @@
  * Routes:
  *   GET  /health
  *   POST /api/generate
- *   GET  /api/status/:requestId
- *   GET  /api/result/:requestId
+ *   GET  /api/status/:requestId?model=<model-id>
+ *   GET  /api/result/:requestId?model=<model-id>
  */
 
 const TEXT_MODEL = "fal-ai/pixverse/v6/text-to-video";
 const IMAGE_MODEL = "fal-ai/pixverse/v6/image-to-video";
+const MODELS = new Set([TEXT_MODEL, IMAGE_MODEL]);
+const ORIGIN = "https://queue.fal.run";
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -34,8 +36,26 @@ function authorized(request, env) {
 }
 
 function validPrompt(prompt) {
-  return typeof prompt === "string" && prompt.trim().length > 0 &&
-    new TextEncoder().encode(prompt).length <= 2048;
+  return typeof prompt === "string" &&
+    prompt.trim().length > 0 &&
+    new TextEncoder().encode(prompt.trim()).length <= 2048;
+}
+
+function selectedModel(url) {
+  const model = url.searchParams.get("model");
+  return MODELS.has(model) ? model : TEXT_MODEL;
+}
+
+async function falRequest(path, env, init = {}) {
+  const response = await fetch(`${ORIGIN}/${path}`, {
+    ...init,
+    headers: {
+      authorization: `Key ${env.FAL_API_KEY}`,
+      ...(init.headers || {}),
+    },
+  });
+  const data = await response.json().catch(() => ({}));
+  return { response, data };
 }
 
 export default {
@@ -55,7 +75,7 @@ export default {
     }
 
     if (url.pathname === "/health" && request.method === "GET") {
-      return json({ ok: true, service: "MINIJOY API", version: "1.0.0" });
+      return json({ ok: true, service: "MINIJOY API", version: "1.1.0" });
     }
 
     if (!authorized(request, env)) {
@@ -92,8 +112,29 @@ export default {
         enable_safety_checker: true,
       };
 
+      if (typeof body.negativePrompt === "string" && body.negativePrompt.trim()) {
+        if (new TextEncoder().encode(body.negativePrompt.trim()).length > 2048) {
+          return json({ ok: false, error: "negativePrompt must be 2048 UTF-8 bytes or less" }, 400);
+        }
+        input.negative_prompt = body.negativePrompt.trim();
+      }
+
+      if (["anime", "3d_animation", "clay", "comic", "cyberpunk"].includes(body.style)) {
+        input.style = body.style;
+      }
+
+      if (Number.isInteger(body.seed) && body.seed >= 0) {
+        input.seed = body.seed;
+      }
+
+      if (["enabled", "disabled", "auto"].includes(body.thinkingType)) {
+        input.thinking_type = body.thinkingType;
+      }
+
       if (mode === "image-to-video") {
-        if (typeof body.imageUrl !== "string" || !/^https:\/\//i.test(body.imageUrl)) {
+        if (typeof body.imageUrl !== "string" ||
+            !/^https:\/\//i.test(body.imageUrl) ||
+            body.imageUrl.length > 4096) {
           return json({ ok: false, error: "A public HTTPS imageUrl is required for image-to-video" }, 400);
         }
         input.image_url = body.imageUrl;
@@ -102,49 +143,64 @@ export default {
           ? body.aspectRatio : "16:9";
       }
 
-      const response = await fetch(`https://queue.fal.run/${model}`, {
-        method: "POST",
-        headers: {
-          "authorization": `Key ${env.FAL_API_KEY}`,
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(input),
-      });
+      try {
+        const { response, data } = await falRequest(model, env, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(input),
+        });
 
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        return json({ ok: false, error: data.detail || data.message || "fal.ai request failed", providerStatus: response.status }, response.status);
+        if (!response.ok) {
+          return json({
+            ok: false,
+            error: data.detail || data.message || data.error || "fal.ai request failed",
+            providerStatus: response.status,
+          }, response.status);
+        }
+
+        if (!data.request_id) {
+          return json({ ok: false, error: "fal.ai did not return a request_id" }, 502);
+        }
+
+        return json({
+          ok: true,
+          model,
+          requestId: data.request_id,
+          statusUrl: data.status_url || null,
+          responseUrl: data.response_url || null,
+          status: data.status || "IN_QUEUE",
+        }, 202);
+      } catch {
+        return json({ ok: false, error: "Could not reach fal.ai. Please retry." }, 502);
       }
-
-      return json({
-        ok: true,
-        model,
-        requestId: data.request_id,
-        statusUrl: data.status_url,
-        responseUrl: data.response_url,
-      }, 202);
     }
 
-    const statusMatch = url.pathname.match(/^\/api\/status\/([a-zA-Z0-9-]+)$/);
+    const statusMatch = url.pathname.match(/^\/api\/status\/([a-fA-F0-9-]{16,64})$/);
     if (statusMatch && request.method === "GET") {
       const requestId = statusMatch[1];
-      const model = url.searchParams.get("model") === IMAGE_MODEL ? IMAGE_MODEL : TEXT_MODEL;
-      const response = await fetch(`https://queue.fal.run/${model}/requests/${requestId}/status`, {
-        headers: { "authorization": `Key ${env.FAL_API_KEY}` },
-      });
-      const data = await response.json().catch(() => ({}));
-      return json({ ok: response.ok, ...data }, response.status);
+      const model = selectedModel(url);
+      try {
+        const { response, data } = await falRequest(
+          `${model}/requests/${requestId}/status`, env
+        );
+        return json({ ok: response.ok, ...data }, response.status);
+      } catch {
+        return json({ ok: false, error: "Could not reach fal.ai status service" }, 502);
+      }
     }
 
-    const resultMatch = url.pathname.match(/^\/api\/result\/([a-zA-Z0-9-]+)$/);
+    const resultMatch = url.pathname.match(/^\/api\/result\/([a-fA-F0-9-]{16,64})$/);
     if (resultMatch && request.method === "GET") {
       const requestId = resultMatch[1];
-      const model = url.searchParams.get("model") === IMAGE_MODEL ? IMAGE_MODEL : TEXT_MODEL;
-      const response = await fetch(`https://queue.fal.run/${model}/requests/${requestId}`, {
-        headers: { "authorization": `Key ${env.FAL_API_KEY}` },
-      });
-      const data = await response.json().catch(() => ({}));
-      return json({ ok: response.ok, ...data }, response.status);
+      const model = selectedModel(url);
+      try {
+        const { response, data } = await falRequest(
+          `${model}/requests/${requestId}`, env
+        );
+        return json({ ok: response.ok, ...data }, response.status);
+      } catch {
+        return json({ ok: false, error: "Could not reach fal.ai result service" }, 502);
+      }
     }
 
     return json({ ok: false, error: "Not found" }, 404);
