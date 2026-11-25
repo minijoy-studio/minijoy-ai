@@ -1,0 +1,77 @@
+{
+  "project": "MINIJOY AI",
+  "schema_version": 1,
+  "status": "specification_only",
+  "agents": [
+    {
+      "id": "tech",
+      "name": "MINIJOY TECH AI",
+      "purpose": "Code review, bug triage, test planning and verified test reporting",
+      "requires": [
+        "repository_read_access",
+        "approved_test_runner",
+        "model_provider"
+      ],
+      "approval_gates": [
+        "production_deploy",
+        "destructive_change",
+        "secret_rotation"
+      ]
+    },
+    {
+      "id": "sales",
+      "name": "SALES AI",
+      "purpose": "Qualified prospect research and personalized outreach drafts",
+      "requires": [
+        "approved_public_lead_sources",
+        "model_provider"
+      ],
+      "approval_gates": [
+        "send_message",
+        "bulk_outreach",
+        "paid_campaign",
+        "personal_data_import"
+      ]
+    },
+    {
+      "id": "orders",
+      "name": "MINIJOY AI Orders",
+      "purpose": "Order intake, state tracking and customer notifications",
+      "requires": [
+        "durable_database",
+        "telegram_bot_token_secret",
+        "payment_provider_signed_webhook",
+        "model_provider"
+      ],
+      "approval_gates": [
+        "refund",
+        "manual_payment_confirmation",
+        "price_change",
+        "customer_data_export"
+      ]
+    },
+    {
+      "id": "manager",
+      "name": "MINIJOY AI Manager",
+      "purpose": "Task routing, delegation, approvals and consolidated status",
+      "requires": [
+        "agent_runtime",
+        "task_store",
+        "model_provider"
+      ],
+      "approval_gates": [
+        "external_communication",
+        "payment",
+        "production_deploy",
+        "data_deletion"
+      ]
+    }
+  ],
+  "shared_rules": [
+    "Never report an action as successful without provider confirmation.",
+    "Never expose credentials or secrets.",
+    "Require approval for external side effects.",
+    "Record task IDs and redact sensitive logs.",
+    "Unrun tests must never be reported as passed."
+  ]
+}
