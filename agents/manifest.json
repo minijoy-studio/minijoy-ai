@@ -3,14 +3,90 @@
   "version": "1.0.0",
   "status": "architecture-defined",
   "agents": [
-    {"id":"developer","name":"Developer AI","role":"Platform development","responsibilities":["code preparation","API diagnostics","bug analysis"],"requires":["LLM provider credentials"]},
-    {"id":"director","name":"Director AI","role":"Film and animation creation","responsibilities":["story outlines","scene breakdowns","video prompts","video generation handoff"],"requires":["FAL_API_KEY"]},
-    {"id":"sales","name":"Sales AI","role":"Customer acquisition and sales support","responsibilities":["lead qualification","sales drafts","customer response drafts"],"requires":["LLM provider credentials","approved customer data source"]},
-    {"id":"operator","name":"Operator AI","role":"Workflow coordination","responsibilities":["task intake","agent routing","status reporting"],"requires":["LLM provider credentials","workflow runtime"]}
+    {
+      "id": "developer",
+      "name": "Developer AI",
+      "role": "Platform development",
+      "responsibilities": [
+        "code preparation",
+        "API diagnostics",
+        "bug analysis"
+      ],
+      "requires": [
+        "LLM provider credentials"
+      ]
+    },
+    {
+      "id": "director",
+      "name": "Director AI",
+      "role": "Film and animation creation",
+      "responsibilities": [
+        "story outlines",
+        "scene breakdowns",
+        "video prompts",
+        "video generation handoff"
+      ],
+      "requires": [
+        "FAL_API_KEY"
+      ]
+    },
+    {
+      "id": "sales",
+      "name": "Sales AI",
+      "role": "Customer acquisition and sales support",
+      "responsibilities": [
+        "lead qualification",
+        "sales drafts",
+        "customer response drafts"
+      ],
+      "requires": [
+        "LLM provider credentials",
+        "approved customer data source"
+      ]
+    },
+    {
+      "id": "operator",
+      "name": "Operator AI",
+      "role": "Workflow coordination",
+      "responsibilities": [
+        "task intake",
+        "agent routing",
+        "status reporting"
+      ],
+      "requires": [
+        "LLM provider credentials",
+        "workflow runtime"
+      ]
+    },
+    {
+      "id": "devops",
+      "name": "DevOps AI",
+      "role": "Infrastructure and release engineering",
+      "responsibilities": [
+        "Cloudflare Worker setup and deployment readiness",
+        "server-side secret configuration without exposing secret values",
+        "API health and endpoint verification",
+        "CI/CD monitoring and release checks",
+        "incident diagnosis, logs review and rollback planning"
+      ],
+      "requires": [
+        "Cloudflare account access",
+        "approved deployment runner",
+        "secret manager",
+        "monitoring and logging access"
+      ],
+      "approvalGates": [
+        "production deployment",
+        "secret creation or rotation",
+        "DNS and domain changes",
+        "billing changes",
+        "destructive infrastructure changes"
+      ]
+    }
   ],
   "security": {
     "providerKeysServerSideOnly": true,
     "externalActionsRequireExplicitAuthorization": true
   },
-  "note": "Architecture definition only; agents are not deployed or operational yet."
+  "note": "Architecture definition only; agents are not deployed or operational yet. DevOps AI is specified as a fifth role for MINIJOY AI and intended to be shared with FLIXO AI; a live agent runtime and authorized infrastructure integrations are still required."
 }

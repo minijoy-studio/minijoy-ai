@@ -65,6 +65,25 @@
         "production_deploy",
         "data_deletion"
       ]
+    },
+    {
+      "id": "devops",
+      "name": "MINIJOY DEVOPS AI",
+      "purpose": "Infrastructure operations, Cloudflare Worker configuration, deployment readiness, observability, incident triage and release verification",
+      "requires": [
+        "repository_read_access",
+        "cloudflare_account_access",
+        "approved_deployment_runner",
+        "secret_manager_access",
+        "model_provider"
+      ],
+      "approval_gates": [
+        "production_deploy",
+        "secret_creation_or_rotation",
+        "dns_or_domain_change",
+        "billing_change",
+        "destructive_infrastructure_change"
+      ]
     }
   ],
   "shared_rules": [
@@ -72,6 +91,8 @@
     "Never expose credentials or secrets.",
     "Require approval for external side effects.",
     "Record task IDs and redact sensitive logs.",
-    "Unrun tests must never be reported as passed."
+    "Unrun tests must never be reported as passed.",
+    "DEVOPS AI must verify deployment and health checks from provider responses; a successful build alone is not a production deployment.",
+    "DEVOPS AI must never request, print, commit, or expose secret values; use approved secret-management interfaces only."
   ]
 }
