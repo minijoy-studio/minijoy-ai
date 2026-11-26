@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MINIJOY PHONE AI</string>
+    <string name="accessibility_description">Выполняет только одноразовый клик по точному тексту, который пользователь сам ввёл и подтвердил в приложении. Не собирает содержимое экрана.</string>
+</resources>
