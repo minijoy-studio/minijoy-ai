@@ -1,0 +1,12 @@
+{
+  "name": "MINIJOY PHONE AI",
+  "short_name": "MINIJOY AI",
+  "description": "Помощник для управления проектами MINIJOY, FLIXO и 1000 кармильцы",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#101827",
+  "lang": "ru",
+  "icons": []
+}
