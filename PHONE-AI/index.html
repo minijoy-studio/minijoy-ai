@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="MINIJOY PHONE AI — помощник для управления проектами с телефона">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>MINIJOY PHONE AI</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#141f32;--line:#263650;--text:#f4f7fb;--muted:#9aabc2;--blue:#70a7ff;--mint:#7ce3c1}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1b3150 0,#0b1220 55%);color:var(--text);font:16px system-ui,-apple-system,sans-serif;min-height:100vh}
+main{width:min(760px,100%);margin:auto;padding:24px 16px 48px}.top{display:flex;align-items:center;gap:14px;margin:10px 0 24px}.logo{width:52px;height:52px;border-radius:17px;background:linear-gradient(135deg,#70a7ff,#7ce3c1);display:grid;place-items:center;color:#071321;font-size:26px;font-weight:900}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--mint);font-weight:700}.title{font-size:25px;font-weight:800;line-height:1.1}.sub{color:var(--muted);font-size:13px;margin-top:5px}
+.card{background:rgba(20,31,50,.94);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 12px 36px #0002}.card h2{font-size:17px;margin:0 0 12px}.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.project{padding:13px 8px;border-radius:15px;border:1px solid var(--line);background:#0f192a;text-align:center}.project b{display:block;font-size:14px}.project span{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+textarea{width:100%;min-height:116px;background:#0b1423;border:1px solid #31445f;border-radius:14px;padding:14px;color:var(--text);font:inherit;resize:vertical;outline:none}textarea:focus{border-color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}button,.filebtn{border:0;border-radius:13px;padding:12px 15px;background:#263b5a;color:white;font:600 14px system-ui;cursor:pointer}.primary{background:linear-gradient(135deg,#6da6ff,#4786ed);color:#071321}.mint{background:#1c4a43;color:#c6ffec}.wide{width:100%}.hint{color:var(--muted);font-size:12px;line-height:1.5;margin-top:10px}.task{display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:14px}.task input{accent-color:var(--mint);width:18px;height:18px}.task.done span{text-decoration:line-through;color:var(--muted)}.task button{margin-left:auto;padding:6px 9px;background:#273348}.preview{max-width:100%;max-height:220px;border-radius:12px;margin-top:12px;display:none}.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
+@media(max-width:420px){.projects{grid-template-columns:1fr}.project{text-align:left}.project span{display:inline;margin-left:8px}}
+</style>
+</head>
+<body><main>
+<header class="top"><div class="logo">M</div><div><div class="eyebrow">YOUR PROJECT COMPANION</div><div class="title">MINIJOY PHONE AI</div><div class="sub">Помощник для твоих проектов на Android</div></div></header>
+<section class="card"><h2>Твои проекты</h2><div class="projects">
+<div class="project"><b>🐻 MINIJOY AI</b><span>Мультфильмы и API</span></div>
+<div class="project"><b>🎬 FLIXO AI</b><span>Кино и короткие фильмы</span></div>
+<div class="project"><b>🧠 1000 кармильцы</b><span>Команда AI-агентов</span></div>
+</div></section>
+<section class="card"><h2>🎙️ Скажи помощнику, что нужно сделать</h2>
+<textarea id="command" placeholder="Например: Проверь MINIJOY API и помоги исправить ошибку..."></textarea>
+<div class="actions"><button class="mint" id="voice">🎙️ Голосовой ввод</button><button class="primary" id="copy">Скопировать команду</button><button id="chat">Открыть ChatGPT</button></div>
+<div class="hint" id="voiceStatus">Голосовой ввод работает в браузерах, поддерживающих распознавание речи. Для обработки команды отправь её в ChatGPT.</div>
+</section>
+<section class="card"><h2>📷 Покажи проблему</h2><label class="filebtn" for="shot">Выбрать скриншот</label><input id="shot" type="file" accept="image/*" capture="environment" hidden><img id="preview" class="preview" alt="Предпросмотр скриншота"><div class="hint">Скриншот останется на телефоне. Чтобы разобрать его вместе с ChatGPT, прикрепи изображение в чате.</div></section>
+<section class="card"><h2>✅ Список дел</h2><div id="tasks"></div><div class="actions"><button id="addTask" class="mint">＋ Добавить задачу</button></div></section>
+<section class="card"><h2>🔐 Безопасность</h2><div class="hint">Это первая версия помощника. Она не управляет телефоном самостоятельно и не читает другие приложения. Доступ к экрану и автоматические нажатия потребуют отдельного Android-приложения и твоего явного разрешения. Не вводи сюда пароли, API-ключи или секреты.</div></section>
+<div class="footer">MINIJOY PHONE AI · версия 0.1 · создано для Redmi Note 15 Pro</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const initial=[{t:"Проверить MINIJOY API",d:false},{t:"Подключить безопасную публикацию Cloudflare",d:false},{t:"Подготовить FLIXO AI",d:false},{t:"Развивать проект 1000 кармильцы",d:false}];
+let tasks;try{tasks=JSON.parse(localStorage.getItem("mpai-tasks")||"null")||initial}catch{tasks=initial}
+function save(){localStorage.setItem("mpai-tasks",JSON.stringify(tasks));render()}
+function render(){$("tasks").innerHTML="";tasks.forEach((x,i)=>{const row=document.createElement("label");row.className="task"+(x.d?" done":"");const cb=document.createElement("input");cb.type="checkbox";cb.checked=x.d;cb.onchange=()=>{tasks[i].d=cb.checked;save()};const span=document.createElement("span");span.textContent=x.t;const del=document.createElement("button");del.type="button";del.textContent="×";del.setAttribute("aria-label","Удалить задачу");del.onclick=()=>{tasks.splice(i,1);save()};row.append(cb,span,del);$("tasks").append(row)})}
+$("addTask").onclick=()=>{const t=prompt("Название задачи");if(t&&t.trim()){tasks.push({t:t.trim(),d:false});save()}}
+$("copy").onclick=async()=>{const t=$("command").value.trim();if(!t){$("command").focus();return}try{await navigator.clipboard.writeText(t);$("voiceStatus").textContent="Команда скопирована. Теперь открой ChatGPT и вставь её."}catch{$("command").select();$("voiceStatus").textContent="Выдели текст и скопируй его вручную."}}
+$("chat").onclick=()=>window.open("https://chatgpt.com/","_blank","noopener")
+$("shot").onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const u=URL.createObjectURL(f);$("preview").src=u;$("preview").style.display="block"}
+$("voice").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("voiceStatus").textContent="В этом браузере голосовой ввод не поддерживается. Используй клавиатуру телефона.";return}const r=new SR();r.lang="ru-RU";r.interimResults=false;r.onstart=()=>$("voiceStatus").textContent="Слушаю тебя…";r.onresult=e=>{$("command").value+=($("command").value?" ":"")+e.results[0][0].transcript;$("voiceStatus").textContent="Готово. Проверь текст команды."};r.onerror=()=>$("voiceStatus").textContent="Не удалось распознать речь. Проверь разрешение микрофона.";r.start()}
+if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+render();
+</script></body></html>
