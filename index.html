@@ -1,177 +1,174 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d1c">
 <title>MINIJOY AI — Create Without Limits</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:Arial,sans-serif;
-background:radial-gradient(ellipse at 50% -20%,#29205f 0%,#090d1c 55%);color:white;
-min-height:100vh;
-}
-header{
-display:flex;justify-content:space-between;
-align-items:center;padding:22px 7%;position:sticky;top:0;background:rgba(9,13,28,.92);backdrop-filter:blur(14px);z-index:10;
-border-bottom:1px solid #252b42;
-}
+:root{color-scheme:dark}
+body{font-family:Arial,sans-serif;background:radial-gradient(ellipse at 50% -20%,#29205f 0%,#090d1c 55%);color:white;min-height:100vh}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 7%;position:sticky;top:0;background:rgba(9,13,28,.94);backdrop-filter:blur(14px);z-index:10;border-bottom:1px solid #252b42}
 .logo{font-size:25px;font-weight:900;color:#8b7cff}
 nav a{color:#ddd;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{text-align:center;padding:110px 20px 85px;position:relative;overflow:hidden}.hero:before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:#8067ff;filter:blur(150px);opacity:.18;top:0;left:calc(50% - 210px);pointer-events:none}.hero>*{position:relative}
-.tag{
-display:inline-block;padding:10px 18px;
-border:1px solid #6556bd;border-radius:30px;
-color:#b6aaff;font-size:13px;margin-bottom:25px
-}
+.hero{text-align:center;padding:105px 20px 80px;position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;width:420px;height:420px;border-radius:50%;background:#8067ff;filter:blur(150px);opacity:.18;top:0;left:calc(50% - 210px);pointer-events:none}
+.hero>*{position:relative}
+.tag{display:inline-block;padding:10px 18px;border:1px solid #6556bd;border-radius:30px;color:#b6aaff;font-size:13px;margin-bottom:25px}
 h1{font-size:clamp(42px,8vw,76px);line-height:1.1}
 h1 span{color:#9b85ff}
-.hero p{
-color:#aab1c8;font-size:18px;
-max-width:600px;margin:25px auto;line-height:1.7
-}
-.btn{
-display:inline-block;padding:16px 28px;
-border-radius:12px;background:#8067ff;
-color:white;text-decoration:none;font-weight:bold;
-border:0;cursor:pointer;font-size:16px
-}
+.hero p{color:#aab1c8;font-size:18px;max-width:600px;margin:25px auto;line-height:1.7}
+.btn{display:inline-block;padding:16px 28px;border-radius:12px;background:#8067ff;color:white;text-decoration:none;font-weight:bold;border:0;cursor:pointer;font-size:16px}
 .btn:hover{background:#a18cff}
-section{padding:80px 7%;text-align:center}#showcase{background:linear-gradient(180deg,rgba(21,27,48,.35),rgba(9,13,28,.1))}
+.btn:disabled{opacity:.55;cursor:wait}
+section{padding:76px 7%;text-align:center}
+#showcase{background:linear-gradient(180deg,rgba(21,27,48,.35),rgba(9,13,28,.1))}
 h2{font-size:34px;margin-bottom:15px}
-.sub{color:#aab1c8;margin-bottom:40px;line-height:1.6}
-.cards{
-display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;max-width:1050px;margin:auto
-}
-.card{
-background:#151b30;border:1px solid #29314e;
-padding:30px 22px;border-radius:18px;text-align:left
-}
+.sub{color:#aab1c8;margin-bottom:35px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1050px;margin:auto}
+.card{background:#151b30;border:1px solid #29314e;padding:28px 22px;border-radius:18px;text-align:left}
 .card .icon{font-size:35px}
 .card h3{margin:18px 0 12px}
 .card p{color:#aab1c8;line-height:1.6;font-size:14px}
-.generator{
-max-width:700px;margin:35px auto;
-padding:25px;background:#151b30;
-border:1px solid #343c60;border-radius:18px
-}
-textarea{
-width:100%;height:110px;padding:16px;
-border-radius:12px;border:1px solid #414968;
-background:#090d1c;color:white;
-font-size:16px;resize:vertical;margin-bottom:18px
-}
-#message{color:#b6aaff;margin-top:15px}
-footer{
-text-align:center;padding:35px;
-border-top:1px solid #252b42;
-color:#8e96ad;font-size:13px
-}
-@media(max-width:600px){
-nav a{margin-left:9px;font-size:12px}
-header{padding:18px 5%}
-.hero{padding-top:75px}
-}
+.generator{max-width:720px;margin:30px auto;padding:25px;background:#151b30;border:1px solid #343c60;border-radius:18px;text-align:left}
+textarea,select{width:100%;padding:15px;border-radius:12px;border:1px solid #414968;background:#090d1c;color:white;font-size:16px}
+textarea{height:125px;resize:vertical;margin-bottom:16px}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:4px 0 18px}
+.field label{display:block;color:#b9c0d4;font-size:13px;margin:0 0 7px}
+.field select{padding:12px;font-size:14px}
+.check{display:flex;align-items:center;gap:9px;color:#b9c0d4;font-size:14px;margin:0 0 18px}
+.check input{width:18px;height:18px;accent-color:#8067ff}
+#message{color:#c2b8ff;margin-top:16px;line-height:1.5;white-space:pre-wrap}
+#result{display:none;margin-top:20px}
+#result video{width:100%;max-height:520px;border-radius:14px;background:#090d1c}
+#result a{display:inline-block;color:#b6aaff;margin-top:12px}
+.note{font-size:12px;color:#8992ac;margin-top:14px;line-height:1.5}
+footer{text-align:center;padding:35px;border-top:1px solid #252b42;color:#8e96ad;font-size:13px}
+@media(max-width:600px){nav a{margin-left:9px;font-size:12px}header{padding:18px 5%}.hero{padding-top:75px}.controls{grid-template-columns:1fr}section{padding:60px 5%}.generator{padding:18px}}
 </style>
 </head>
 <body>
 <header>
 <div class="logo">✦ MINIJOY AI</div>
-<nav>
-<a href="#features">Features</a>
-<a href="#create">Create</a>
-<a href="#showcase">Our Work</a>
-</nav>
+<nav><a href="#features">Features</a><a href="#create">Create</a><a href="#showcase">Our Work</a></nav>
 </header>
-
 <main>
 <div class="hero">
 <div class="tag">✦ YOUR AI CREATIVE STUDIO</div>
 <h1>Create. Imagine.<br><span>Inspire.</span></h1>
-<p>Turn your imagination into reality.
-Create amazing AI videos, animated films and
-beautiful images with MINIJOY AI.</p>
+<p>Turn your imagination into reality. Create AI videos, animated scenes and beautiful visual stories with MINIJOY AI.</p>
 <a class="btn" href="#create">Start Creating →</a>
 </div>
-
 <section id="features">
 <h2>Everything Starts With Imagination</h2>
 <p class="sub">One platform. Endless possibilities.</p>
 <div class="cards">
-<div class="card">
-<div class="icon">🎬</div>
-<h3>AI Video Studio</h3>
-<p>Bring your ideas to life with AI-powered video creation.</p>
-</div>
-<div class="card">
-<div class="icon">🎨</div>
-<h3>AI Image Generator</h3>
-<p>Create stunning images from your imagination.</p>
-</div>
-<div class="card">
-<div class="icon">🧸</div>
-<h3>AI Animation</h3>
-<p>Create wonderful animated stories and cartoon adventures.</p>
-</div>
-<div class="card">
-<div class="icon">🚀</div>
-<h3>Sales AI</h3>
-<p>Discover opportunities and find potential customers.</p>
-</div>
+<div class="card"><div class="icon">🎬</div><h3>AI Video Studio</h3><p>Turn a written idea into a video clip with AI.</p></div>
+<div class="card"><div class="icon">🎨</div><h3>AI Image Generator</h3><p>Create visual concepts from your imagination.</p></div>
+<div class="card"><div class="icon">🧸</div><h3>AI Animation</h3><p>Build colorful cartoon scenes and character adventures.</p></div>
+<div class="card"><div class="icon">🚀</div><h3>Creative Studio</h3><p>One workspace for ideas, clips and stories.</p></div>
 </div>
 </section>
-
-
 <section id="showcase">
 <h2>Our AI Creations</h2>
-<p class="sub">A first look at AI-powered product films and creative videos.</p>
+<p class="sub">A first look at creative video work from MINIJOY AI.</p>
 <div class="cards">
-<div class="card">
-<video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#090d1c" src="/videos/minijoy-car.mp4"></video>
-<h3>Luxury Car Film</h3>
-<p>A cinematic automotive video created with AI.</p>
-</div>
-<div class="card">
-<video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#090d1c" src="/videos/minijoy-perfume.mp4"></video>
-<h3>Perfume Commercial</h3>
-<p>An elegant product film with dramatic lighting.</p>
-</div>
-<div class="card">
-<video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#090d1c" src="/videos/minijoy-watch.mp4"></video>
-<h3>Luxury Watch Film</h3>
-<p>A premium close-up product showcase.</p>
-</div>
+<div class="card"><video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#090d1c" src="/videos/minijoy-car.mp4"></video><h3>Luxury Car Film</h3><p>A cinematic automotive concept.</p></div>
+<div class="card"><video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#090d1c" src="/videos/minijoy-perfume.mp4"></video><h3>Perfume Commercial</h3><p>An elegant product-film concept.</p></div>
+<div class="card"><video controls playsinline preload="metadata" style="width:100%;border-radius:12px;background:#090d1c" src="/videos/minijoy-watch.mp4"></video><h3>Luxury Watch Film</h3><p>A premium close-up showcase.</p></div>
 </div>
 </section>
-
 <section id="create">
 <h2>Start Your Creation</h2>
-<p class="sub">Describe what you want to create.</p>
+<p class="sub">Describe your scene and submit it to the AI video engine.</p>
 <div class="generator">
-<textarea id="prompt" placeholder="Describe your dream video or image..."></textarea>
-<button class="btn" onclick="createIdea()">Create With AI ✨</button>
-<p id="message"></p>
+<label for="prompt" style="display:block;color:#c4c9da;margin-bottom:9px">Your video idea</label>
+<textarea id="prompt" maxlength="2048" placeholder="Example: A fluffy brown teddy bear in a yellow T-shirt meets a baby grey elephant beside a magical waterfall. High-quality 3D cartoon animation, cinematic lighting."></textarea>
+<div class="controls">
+<div class="field"><label for="duration">Clip duration</label><select id="duration"><option value="5">5 seconds</option><option value="8">8 seconds</option><option value="10" selected>10 seconds</option><option value="15">15 seconds</option></select></div>
+<div class="field"><label for="resolution">Resolution</label><select id="resolution"><option value="540p">540p</option><option value="720p" selected>720p</option><option value="1080p">1080p</option></select></div>
+<div class="field"><label for="ratio">Aspect ratio</label><select id="ratio"><option>16:9</option><option>9:16</option><option>1:1</option><option>4:3</option><option>3:4</option><option>21:9</option></select></div>
+<div class="field"><label for="style">Visual style</label><select id="style"><option value="3d_animation" selected>3D animation</option><option value="anime">Anime</option><option value="clay">Clay</option><option value="comic">Comic</option><option value="cyberpunk">Cyberpunk</option></select></div>
+</div>
+<label class="check"><input id="audio" type="checkbox" checked> Generate audio when supported</label>
+<button id="createButton" class="btn" type="button" onclick="createVideo()">Create Video ✨</button>
+<p id="message" role="status" aria-live="polite"></p>
+<div id="result"><video id="resultVideo" controls playsinline></video><a id="resultLink" target="_blank" rel="noopener">Open generated video</a></div>
+<p class="note">The current video engine creates short clips (up to 15 seconds per request). Longer films require a separate multi-scene production workflow.</p>
 </div>
 </section>
 </main>
-
-<footer>
-<div class="logo">✦ MINIJOY AI</div>
-<p style="margin-top:12px">Your Imagination. Powered by AI.</p>
-<p style="margin-top:12px">© 2026 MINIJOY AI. All rights reserved.</p>
-</footer>
-
+<footer><div class="logo">✦ MINIJOY AI</div><p style="margin-top:12px">Your Imagination. Powered by AI.</p><p style="margin-top:12px">© 2026 MINIJOY AI. All rights reserved.</p></footer>
 <script>
-function createIdea(){
-const p=document.getElementById('prompt').value.trim();
-const m=document.getElementById('message');
-if(!p){
-m.textContent="Please describe your idea first.";
-return;
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+async function readJson(response) {
+  return response.json().catch(() => ({}));
 }
-m.textContent="Your idea is ready! AI generation will be connected in the next stage.";
+function showMessage(text) {
+  document.getElementById("message").textContent = text;
+}
+async function createVideo() {
+  const prompt = document.getElementById("prompt").value.trim();
+  const button = document.getElementById("createButton");
+  const result = document.getElementById("result");
+  if (!prompt) {
+    showMessage("Please describe your video idea first.");
+    return;
+  }
+  button.disabled = true;
+  button.textContent = "Submitting…";
+  result.style.display = "none";
+  showMessage("Connecting to the MINIJOY video engine…");
+  try {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        mode: "text-to-video",
+        prompt,
+        duration: Number(document.getElementById("duration").value),
+        resolution: document.getElementById("resolution").value,
+        aspectRatio: document.getElementById("ratio").value,
+        style: document.getElementById("style").value,
+        generateAudio: document.getElementById("audio").checked
+      })
+    });
+    const data = await readJson(response);
+    if (!response.ok) {
+      if (response.status === 401) throw new Error("Video generation is not activated yet: the private MINIJOY_API_SECRET setting is missing on the server.");
+      if (data.error === "FAL_API_KEY is not configured") throw new Error("Video generation is not activated yet: the fal.ai key is missing on the server.");
+      throw new Error(data.error || "The video request could not be submitted.");
+    }
+    if (!data.requestId || !data.model) throw new Error("The video service returned an incomplete job response.");
+    showMessage("Your video is in the queue. Please keep this page open while it renders.");
+    button.textContent = "Generating…";
+    for (let attempt = 0; attempt < 90; attempt++) {
+      await sleep(3000);
+      const statusResponse = await fetch("/api/status/" + encodeURIComponent(data.requestId) + "?model=" + encodeURIComponent(data.model));
+      const statusData = await readJson(statusResponse);
+      if (!statusResponse.ok) throw new Error(statusData.error || "Could not check video status.");
+      if (statusData.status === "FAILED") throw new Error(statusData.error || "The video provider could not complete this request.");
+      if (statusData.status === "COMPLETED") {
+        const resultResponse = await fetch("/api/result/" + encodeURIComponent(data.requestId) + "?model=" + encodeURIComponent(data.model));
+        const resultData = await readJson(resultResponse);
+        const videoUrl = resultData.video && resultData.video.url;
+        if (!resultResponse.ok || !videoUrl) throw new Error(resultData.error || "The completed video URL was not returned.");
+        document.getElementById("resultVideo").src = videoUrl;
+        document.getElementById("resultLink").href = videoUrl;
+        result.style.display = "block";
+        showMessage("Your video is ready!");
+        return;
+      }
+      showMessage("Rendering video… Status: " + (statusData.status || "IN_PROGRESS"));
+    }
+    showMessage("The video is still processing. Your request was submitted; check again later.");
+  } catch (error) {
+    showMessage(error.message || "Something went wrong. Please try again.");
+  } finally {
+    button.disabled = false;
+    button.textContent = "Create Video ✨";
+  }
 }
 </script>
 </body>
