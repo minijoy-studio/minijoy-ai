@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>FLIXO 1000 AI — Global Specialist Network</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#141d32;--line:#293752;--ink:#f5f7ff;--muted:#aab6cf;--accent:#7de0c3;--gold:#f4c978}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#24465a 0,#101a2d 40%,var(--bg) 75%);color:var(--ink);font-family:Inter,system-ui,Arial,sans-serif;min-height:100vh}
+header{padding:20px max(5%,calc((100% - 1120px)/2));border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;background:#0b1020dd;position:sticky;top:0;backdrop-filter:blur(12px);z-index:3}.brand{font-weight:900;letter-spacing:2px;color:var(--accent);font-size:20px}nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:14px}
+main{max-width:1120px;margin:auto;padding:58px 22px 80px}.hero{text-align:center;padding:25px 0 36px}.eyebrow{color:var(--accent);font-weight:800;letter-spacing:3px;font-size:12px}.hero h1{font-size:clamp(38px,7vw,68px);line-height:1.03;margin:16px 0}.hero h1 span{color:var(--accent)}.hero p{color:var(--muted);max-width:700px;line-height:1.7;margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0 34px}.stat,.panel,.division{background:linear-gradient(145deg,#17243a,#111a2c);border:1px solid var(--line);border-radius:16px}.stat{padding:20px;text-align:center}.stat strong{display:block;font-size:30px;color:var(--gold)}.stat span{font-size:13px;color:var(--muted)}
+.panel{padding:24px;margin:20px 0}.panel h2{margin:0 0 8px;font-size:24px}.muted{color:var(--muted);line-height:1.6;font-size:14px}
+textarea,input,select{width:100%;background:#0b1323;color:var(--ink);border:1px solid #354765;border-radius:10px;padding:13px;font:inherit}textarea{min-height:110px;resize:vertical;margin:12px 0}.controls{display:flex;gap:10px;flex-wrap:wrap}.controls>*{flex:1;min-width:180px}.btn{background:var(--accent);color:#071a19;border:0;border-radius:10px;padding:13px 18px;font-weight:900;cursor:pointer}.btn.secondary{background:#26364f;color:var(--ink);border:1px solid #40516e}.result{margin-top:16px;padding:16px;border:1px solid #38566a;border-radius:12px;background:#0d1a2a;line-height:1.6;white-space:pre-wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}.division{padding:18px}.division h3{font-size:16px;margin:0 0 8px}.division strong{color:var(--gold)}.division p{font-size:13px;color:var(--muted);line-height:1.5;margin:8px 0 0}
+.role-list{display:grid;gap:8px;margin-top:16px}.role{padding:12px;border:1px solid var(--line);border-radius:10px;background:#0e1728;font-size:14px}.role small{display:block;color:var(--muted);margin-top:4px}
+.status{font-size:13px;color:var(--gold);margin-top:12px}
+footer{text-align:center;border-top:1px solid var(--line);padding:28px;color:#8290aa;font-size:12px}
+@media(max-width:620px){header{padding:16px 5%}nav a{margin-left:9px;font-size:12px}.stats{grid-template-columns:1fr}.controls{display:grid}.hero{padding-top:12px}}
+</style>
+</head>
+<body>
+<header><div class="brand">✦ FLIXO 1000 AI</div><nav><a href="#brain">Brain</a><a href="#network">Network</a></nav></header>
+<main>
+<section class="hero"><div class="eyebrow">ONE SHARED BRAIN · 1,000 SPECIALIST BLUEPRINTS</div><h1>Work smarter.<br><span>Build worldwide.</span></h1><p>A global digital-services workbench organised into 10 divisions and 1,000 specialist role blueprints. Describe a lawful project and explore which specialist teams could help.</p></section>
+<section class="stats">
+<div class="stat"><strong id="agentCount">1,000</strong><span>Specialist role blueprints</span></div>
+<div class="stat"><strong id="divisionCount">10</strong><span>Service divisions</span></div>
+<div class="stat"><strong>3</strong><span>Initial languages · EN / RU / KY</span></div>
+</section>
+<section class="panel" id="brain"><h2>Shared Brain — task router</h2><p class="muted">This first public prototype routes a task to a relevant division using local keyword matching. Live model reasoning is not connected yet; results are suggestions for human review.</p>
+<textarea id="task" maxlength="8000" placeholder="Describe a customer problem or digital service you want to deliver..."></textarea>
+<div class="controls"><select id="language" aria-label="Response language"><option value="en">English</option><option value="ru">Русский</option><option value="ky">Кыргызча</option></select><button class="btn" id="routeBtn">Find specialist teams</button></div>
+<div id="result" class="result" aria-live="polite">Your recommended service division will appear here.</div>
+<div class="status" id="loadStatus">Loading the 1,000-role registry…</div>
+</section>
+<section id="network"><h2>10 global service divisions</h2><p class="muted">Each division contains 100 role definitions. A role definition is a blueprint, not a separately running AI agent.</p><div class="grid" id="divisions"></div>
+<div class="panel"><h2>Search the role registry</h2><input id="search" type="search" placeholder="Search roles, e.g. storyboard, translation, online store"><div id="roles" class="role-list"></div></div>
+</section>
+</main>
+<footer>FLIXO 1000 AI · Prototype release · Human review required · No earnings or customer results are guaranteed</footer>
+<script>
+const names={video:"Video & Animation",sales:"Global Sales & Customer Acquisition",design:"Graphic Design & Advertising",social:"Social Media & Publishing",ecommerce:"E-commerce & Online Stores",writing:"Writing & Documentation",translation:"Translation & Localization",education:"Education & Learning",audio:"Audio & Voice Services",webops:"Websites, Analytics & Operations"};
+const keywords={
+video:["video","film","animation","cartoon","storyboard","youtube","мульт","видео","фильм","анимац","кино"],
+sales:["sales","sell","customer","client","lead","acquisition","продаж","клиент","покупател"],
+design:["design","logo","graphic","banner","advert","brand","дизайн","логотип","баннер","реклам"],
+social:["social","instagram","tiktok","facebook","publishing","content","соцсет","инстаграм","публикац"],
+ecommerce:["shop","store","ecommerce","product","catalog","магазин","товар","торгов"],
+writing:["write","writing","document","copy","article","script","текст","статья","сценар"],
+translation:["translate","translation","localization","language","перевод","язык","локализац"],
+education:["teach","course","learn","lesson","education","обуч","курс","урок"],
+audio:["audio","voice","podcast","music","sound","озвуч","голос","звук"],
+webops:["website","web","analytics","operations","automation","сайт","аналит","автомат"]
+};
+let registry=[];
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderDivisions(data){
+ const teams=data.teams||[];
+ $("divisionCount").textContent=teams.length||10;
+ $("agentCount").textContent=(data.agents||[]).length.toLocaleString()||"1,000";
+ $("divisions").innerHTML=teams.map(t=>'<article class="division"><h3>'+esc(t.name)+'</h3><strong>'+esc(t.agentCount)+' roles</strong><p>10 task families × 10 customer segments</p></article>').join("");
+}
+function renderRoles(q=""){
+ const found=registry.filter(a=>(a.role+" "+a.id+" "+a.team).toLowerCase().includes(q.toLowerCase())).slice(0,40);
+ $("roles").innerHTML=found.map(a=>'<div class="role">'+esc(a.role)+'<small>'+esc(a.id)+' · '+esc(names[a.team]||a.team)+' · '+esc(a.status||"planned")+'</small></div>').join("")||'<p class="muted">No matching roles found.</p>';
+}
+fetch("./agents.json").then(r=>{if(!r.ok)throw Error("Registry file unavailable");return r.json()}).then(data=>{
+ registry=data.agents||[];renderDivisions(data);renderRoles();$("loadStatus").textContent="Registry loaded: "+registry.length.toLocaleString()+" role definitions. All are blueprints, not active autonomous agents.";
+}).catch(()=>{$("loadStatus").textContent="Could not load agents.json. The dashboard is visible, but registry search is unavailable.";});
+$("search").addEventListener("input",e=>renderRoles(e.target.value));
+$("routeBtn").addEventListener("click",()=>{
+ const task=$("task").value.trim(),lang=$("language").value;
+ if(!task){$("result").textContent="Please describe the task first.";return;}
+ const lower=task.toLowerCase(),scores=Object.entries(keywords).map(([id,words])=>({id,score:words.reduce((n,w)=>n+(lower.includes(w)?1:0),0)})).sort((a,b)=>b.score-a.score);
+ const chosen=scores.filter(x=>x.score>0).slice(0,3);
+ const fallback=chosen.length?chosen:[{id:"sales",score:0},{id:"writing",score:0}];
+ const roleMatches=registry.filter(a=>fallback.some(x=>x.id===a.team)).slice(0,8);
+ const labels={en:"Suggested specialist divisions",ru:"Рекомендуемые направления",ky:"Сунушталган адистик багыттар"};
+ const next={en:"Next step: validate the customer need, define one deliverable, estimate effort and costs, then obtain human approval.",ru:"Следующий шаг: проверить потребность клиента, определить результат, оценить трудозатраты и расходы, затем получить подтверждение человека.",ky:"Кийинки кадам: кардардын муктаждыгын текшерип, натыйжаны жана чыгымды аныктап, адамдын макулдугун алуу."};
+ $("result").textContent=labels[lang]+":\n"+fallback.map(x=>"• "+names[x.id]).join("\n")+"\n\n"+(roleMatches.length?roleMatches.map(x=>"• "+x.role).join("\n"):"No role details loaded.")+"\n\n"+next[lang]+"\n\nThis is a local prototype suggestion, not a live AI-generated business plan.";
+});
+</script>
+</body>
+</html>
