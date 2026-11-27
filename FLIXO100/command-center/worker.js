@@ -54,7 +54,7 @@ async function readBody(request) {
 export default {
   async fetch(request, env) {
     const cors = corsHeaders(request, env);
-    if (cors === null) return respond({ ok: false, error: "Origin not allowed." }, 403);
+    if (cors === null) return json({ ok: false, error: "Origin not allowed." }, 403);
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: { ...cors, ...JSON_HEADERS } });
     }
@@ -62,7 +62,7 @@ export default {
     const respond = (data, status = 200) => json(data, status, cors);
     const url = new URL(request.url);
     if (request.method === "GET" && url.pathname === "/api/health") {
-      return json({
+      return respond({
         ok: true,
         service: "FLIXO Command Center API",
         aiConfigured: Boolean(env.FLIXO_AI_API_URL && env.FLIXO_AI_API_KEY && env.FLIXO_AI_MODEL),
@@ -71,11 +71,11 @@ export default {
     }
 
     if (request.method !== "POST" || !["/api/command", "/api/execute"].includes(url.pathname)) {
-      return json({ ok: false, error: "Not found." }, 404);
+      return respond({ ok: false, error: "Not found." }, 404);
     }
-    if (!authorized(request, env)) return json({ ok: false, error: "Owner authorization required." }, 401);
+    if (!authorized(request, env)) return respond({ ok: false, error: "Owner authorization required." }, 401);
     if (!env.FLIXO_AI_API_URL || !env.FLIXO_AI_API_KEY || !env.FLIXO_AI_MODEL) {
-      return json({ ok: false, status: "brain_not_configured", error: "AI provider secrets/configuration are missing." }, 503);
+      return respond({ ok: false, status: "brain_not_configured", error: "AI provider secrets/configuration are missing." }, 503);
     }
 
     try {
@@ -86,7 +86,7 @@ export default {
           language: body.language || "ru",
           env
         });
-        return json(result, result.ok ? 200 : 502);
+        return respond(result, result.ok ? 200 : 502);
       }
 
       const result = await runApprovedAssignment({
@@ -96,9 +96,9 @@ export default {
         language: body.language || "ru",
         env
       });
-      return json(result, result.ok ? 200 : 400);
+      return respond(result, result.ok ? 200 : 400);
     } catch (error) {
-      return json({ ok: false, status: "request_error", error: String(error?.message || error) }, 400);
+      return respond({ ok: false, status: "request_error", error: String(error?.message || error) }, 400);
     }
   }
 };
