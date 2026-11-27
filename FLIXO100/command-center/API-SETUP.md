@@ -8,7 +8,7 @@ Set these in Cloudflare Worker Settings → Variables and Secrets:
 
 - Secret `FLIXO_OWNER_TOKEN`: generate a long random token (at least 32 characters).
 - Secret `FLIXO_AI_API_KEY`: API key from the chosen model provider.
-- Variable `FLIXO_AI_API_URL`: provider's OpenAI-compatible chat-completions URL.
+- Variable `FLIXO_AI_API_URL`: OpenAI Responses API URL: `https://api.openai.com/v1/responses`.
 - Variable `FLIXO_AI_MODEL`: model name supported by that provider.
 - Optional variable `FLIXO_ALLOWED_ORIGINS`: comma-separated exact website origins. Same-origin requests are allowed automatically.
 
