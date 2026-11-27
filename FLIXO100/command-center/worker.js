@@ -11,13 +11,13 @@
  *
  * Never place secrets in browser code or Git.
  */
-import { planOwnerCommand, runApprovedAssignment } from "./director.js";
+import { planOwnerCommand, runApprovedAssignment } from "../director.js";
 
 const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" };
 const MAX_BODY = 12000;
 
-function json(data, status = 200) {
-  return new Response(JSON.stringify(data), { status, headers: JSON_HEADERS });
+function json(data, status = 200, cors = {}) {
+  return new Response(JSON.stringify(data), { status, headers: { ...JSON_HEADERS, ...cors } });
 }
 
 function corsHeaders(request, env) {
@@ -54,11 +54,12 @@ async function readBody(request) {
 export default {
   async fetch(request, env) {
     const cors = corsHeaders(request, env);
-    if (cors === null) return json({ ok: false, error: "Origin not allowed." }, 403);
+    if (cors === null) return respond({ ok: false, error: "Origin not allowed." }, 403);
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: { ...cors, ...JSON_HEADERS } });
     }
 
+    const respond = (data, status = 200) => json(data, status, cors);
     const url = new URL(request.url);
     if (request.method === "GET" && url.pathname === "/api/health") {
       return json({
