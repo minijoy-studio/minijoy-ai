@@ -1,0 +1,7 @@
+# FLIXO Command Center Worker
+name = "flixo-command-center-api"
+main = "worker.js"
+compatibility_date = "2026-11-27"
+
+[vars]
+FLIXO_ALLOWED_ORIGINS = ""
