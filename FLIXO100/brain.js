@@ -13,11 +13,11 @@ const MAX_TASK_CHARS = 8000;
 
 export function buildBrainMessages(task, language = "ru") {
   if (typeof task !== "string" || !task.trim()) throw new Error("A non-empty task description is required.");
-  if (task.length > MAX_TASK_CHARS) throw new Error(\`Task is too long; maximum is \${MAX_TASK_CHARS} characters.\`);
+  if (task.length > MAX_TASK_CHARS) throw new Error(`Task is too long; maximum is ${MAX_TASK_CHARS} characters.`);
   const system = [
     "You are the shared planning brain for FLIXO, a global digital-services workbench.",
     "Choose the best lawful, non-harmful specialist division.",
-    \`Existing divisions: \${DIVISIONS.join("; ")}.\`,
+    `Existing divisions: ${DIVISIONS.join("; ")}.`,
     "Return concise JSON with keys: language, opportunity, customer, deliverable, recommendedDivision, specialistRoles (array), steps (array), estimatedEffort, risks (array), humanApprovalRequired, revenueModel, nextAction, youtubePlan (object or null).",
     "For MINIJOY and YouTube tasks, include audience fit, episode titles, description, thumbnail brief, Shorts ideas and a realistic calendar. Keep children’s content age-appropriate and mention the Made for Kids designation when applicable.",
     "Only draft plans and content. Never publish, message customers, spend money, transfer funds, or claim earnings or customers without evidence.",
@@ -26,7 +26,7 @@ export function buildBrainMessages(task, language = "ru") {
   ].join(" ");
   return [
     { role: "system", content: system },
-    { role: "user", content: \`Response language: \${language}.\\nTask/opportunity:\\n\${task.trim()}\` }
+    { role: "user", content: `Response language: ${language}.\\nTask/opportunity:\\n${task.trim()}` }
   ];
 }
 
@@ -48,7 +48,7 @@ export async function think(task, env, language = "ru") {
   const messages = buildBrainMessages(task, language);
   const response = await fetch(env.FLIXO_AI_API_URL, {
     method: "POST",
-    headers: { "Authorization": \`Bearer \${env.FLIXO_AI_API_KEY}\`, "Content-Type": "application/json" },
+    headers: { "Authorization": `Bearer ${env.FLIXO_AI_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model: env.FLIXO_AI_MODEL,
       input: messages,
