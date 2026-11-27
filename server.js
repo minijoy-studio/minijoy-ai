@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { randomBytes } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -7,6 +8,14 @@ import worker from "./worker.js";
 const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ROOT = fileURLToPath(new URL(".", import.meta.url));
+// Keep the internal Worker-to-server credential private and available even
+// when Railway has not been given a separate MINIJOY_API_SECRET variable.
+const INTERNAL_API_SECRET =
+  process.env.MINIJOY_API_SECRET || randomBytes(32).toString("hex");
+const RUNTIME_ENV = {
+  ...process.env,
+  MINIJOY_API_SECRET: INTERNAL_API_SECRET
+};
 const MIME = {
   ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8",
@@ -62,12 +71,11 @@ const server = createServer(async (req, res) => {
       else if (value !== undefined) headers.set(key, value);
     }
 
-    // The API secret stays on the server and is never exposed to browser code.
+    // Never trust a client-supplied internal credential. The server injects
+    // its private credential only for requests handled by the local Worker.
     if (url.pathname.startsWith("/api/")) {
       headers.delete("x-minijoy-secret");
-      if (process.env.MINIJOY_API_SECRET) {
-        headers.set("x-minijoy-secret", process.env.MINIJOY_API_SECRET);
-      }
+      headers.set("x-minijoy-secret", INTERNAL_API_SECRET);
     }
 
     const init = { method: req.method, headers };
@@ -76,7 +84,7 @@ const server = createServer(async (req, res) => {
     }
 
     const request = new Request(url, init);
-    const response = await worker.fetch(request, process.env);
+    const response = await worker.fetch(request, RUNTIME_ENV);
     res.statusCode = response.status;
     response.headers.forEach((value, key) => res.setHeader(key, value));
     res.end(Buffer.from(await response.arrayBuffer()));
