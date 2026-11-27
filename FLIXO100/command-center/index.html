@@ -73,7 +73,7 @@ const previewTitle=document.getElementById("previewTitle");
 const approve=document.getElementById("approve");
 const apiNotice=document.getElementById("apiNotice");
 function config(){
- const base=document.getElementById("apiBase").value.trim().replace(/\\/$/,"");
+ const base=document.getElementById("apiBase").value.trim().replace(/\/$/,"");
  const token=document.getElementById("ownerToken").value;
  if(!base||!token) throw new Error("Укажи адрес API и секретный токен владельца.");
  return {base,token};
