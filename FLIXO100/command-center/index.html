@@ -24,13 +24,13 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status">● Режим подготовки · API не подключён</div></header>
+<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status">● Модули подготовлены · API не подключён</div></header>
 <section class="hero"><h2>Твой командный центр</h2><p>Отдавай распоряжения, выбирай специалиста и проверяй план перед выполнением. Все внешние действия и расходы остаются под твоим контролем.</p></section>
 <div class="grid">
 <section class="panel">
 <h3>Новый приказ</h3><p class="sub">Сформулируй задачу обычным языком.</p>
 <label for="agent">Кому направить приказ</label>
-<select id="agent"><option value="director">AI-директор (проектируемый модуль)</option><option value="social">Social Media Content Planner</option><option value="product">Product Description Writer</option></select>
+<select id="agent"><option value="director">AI-директор (модуль подготовлен)</option><option value="social">Social Media Content Planner</option><option value="product">Product Description Writer</option></select>
 <label for="command">Текст приказа</label>
 <textarea id="command" maxlength="6000" placeholder="Например: Подготовь контент-план на 7 дней для небольшой кофейни в Бишкеке. Цель — привлечь посетителей в будние дни."></textarea>
 <div class="actions"><button class="primary" id="prepare">Подготовить приказ</button><button class="secondary" id="clear">Очистить</button></div>
@@ -42,7 +42,8 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 <div class="notice">Показатели отражают состояние разработки, а не выручку.</div>
 </aside>
 <section class="panel">
-<h3>Пилотные специалисты</h3><p class="sub">Первые два сценария, которые подключим после панели.</p>
+<h3>Команда управления и специалисты</h3><p class="sub">AI-директор координирует два пилотных сценария.</p>
+<div class="agent"><div class="avatar">🧭</div><div><b>AI Director</b><small>Разбирает твой приказ, предлагает исполнителя и готовит задачу на утверждение.</small><div class="tag">Модуль подготовлен · ждёт серверного подключения</div></div></div>
 <div class="agent"><div class="avatar">✍️</div><div><b>Social Media Content Planner</b><small>Контент-план на 7 дней, подписи, идеи публикаций.</small><div class="tag">Сценарий готов · ждёт AI-подключения</div></div></div>
 <div class="agent"><div class="avatar">🛍️</div><div><b>Product Description Writer</b><small>Названия и описания товаров на основе проверенных фактов.</small><div class="tag">Сценарий готов · ждёт AI-подключения</div></div></div>
 </section>
@@ -54,10 +55,10 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 </section>
 <section class="panel full">
 <h3>Путь к запуску</h3><p class="sub">Панель управления — первый этап. Затем подключим исполнение приказов.</p>
-<div class="steps"><div class="step"><b>1. Интерфейс</b><p>Командный центр, выбор специалиста, проверка приказа.</p></div><div class="step"><b>2. Сервер и AI-мозг</b><p>Защищённый API, секреты провайдера, журнал заданий.</p></div><div class="step"><b>3. Два специалиста</b><p>Подключение, тесты качества и первые реальные клиентские задачи.</p></div></div>
+<div class="steps"><div class="step"><b>1. Интерфейс</b><p>Командный центр, выбор специалиста, проверка приказа.</p></div><div class="step"><b>2. Сервер и AI-мозг</b><p>Защищённый API, секреты провайдера, журнал заданий.</p></div><div class="step"><b>3. Подключение команды</b><p>AI-директор и два специалиста: тесты качества и первые реальные клиентские задачи.</p></div></div>
 </section>
 </div>
-<footer>FLIXO COMMAND CENTER · Prototype 0.1 · Управление и исполнение пока не подключены</footer>
+<footer>FLIXO COMMAND CENTER · Prototype 0.2 · Модули команды подготовлены; серверное исполнение не подключено</footer>
 </div>
 <script>
 const agentNames={director:"AI-директор (проектируемый модуль)",social:"Social Media Content Planner",product:"Product Description Writer"};
