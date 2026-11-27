@@ -3,7 +3,7 @@
  *
  * Required Worker secrets/variables:
  *   FLIXO_OWNER_TOKEN (secret, long random token)
- *   FLIXO_AI_API_URL   (variable, e.g. https://api.openai.com/v1/chat/completions)
+ *   FLIXO_AI_API_URL   (variable, e.g. https://api.openai.com/v1/responses)
  *   FLIXO_AI_API_KEY   (secret)
  *   FLIXO_AI_MODEL     (variable supported by provider)
  * Optional:
