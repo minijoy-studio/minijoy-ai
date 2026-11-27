@@ -1,7 +1,7 @@
 {
   "product": "FLIXO 1000 AI",
   "pilotVersion": "1.0.0",
-  "status": "pilot_blueprints_created_not_live",
+  "status": "pilot_two_workflows_created_not_live",
   "goal": {
     "pilotAgents": 10,
     "targetRevenuePerAgentPerDayUsd": 10,
@@ -45,7 +45,7 @@
         "human review",
         "deliver content pack"
       ],
-      "status": "blueprint_ready"
+      "status": "workflow_ready_requires_model_credentials"
     },
     {
       "id": "pilot-003",
@@ -75,7 +75,7 @@
         "fact check",
         "deliver listing text"
       ],
-      "status": "blueprint_ready"
+      "status": "workflow_ready_requires_model_credentials"
     },
     {
       "id": "pilot-005",
