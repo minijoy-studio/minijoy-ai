@@ -24,17 +24,21 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status">● Модули подготовлены · API не подключён</div></header>
+<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status">● Ожидает подключения API</div></header>
 <section class="hero"><h2>Твой командный центр</h2><p>Отдавай распоряжения, выбирай специалиста и проверяй план перед выполнением. Все внешние действия и расходы остаются под твоим контролем.</p></section>
 <div class="grid">
 <section class="panel">
 <h3>Новый приказ</h3><p class="sub">Сформулируй задачу обычным языком.</p>
-<label for="agent">Кому направить приказ</label>
-<select id="agent"><option value="director">AI-директор (модуль подготовлен)</option><option value="social">Social Media Content Planner</option><option value="product">Product Description Writer</option></select>
+<label for="apiBase">Адрес API командного центра</label>
+<input id="apiBase" type="url" placeholder="https://твой-worker.workers.dev" autocomplete="url" style="width:100%;background:#0d1726;color:var(--text);border:1px solid #344a66;border-radius:12px;padding:13px;font:inherit">
+<label for="ownerToken">Секрет владельца (FLIXO_OWNER_TOKEN)</label>
+<input id="ownerToken" type="password" placeholder="Вставь секретный токен" autocomplete="off" style="width:100%;background:#0d1726;color:var(--text);border:1px solid #344a66;border-radius:12px;padding:13px;font:inherit>
+<label for="agent">Получатель приказа</label>
+<select id="agent"><option value="director">AI-директор — выберет специалиста</option></select>
 <label for="command">Текст приказа</label>
 <textarea id="command" maxlength="6000" placeholder="Например: Подготовь контент-план на 7 дней для небольшой кофейни в Бишкеке. Цель — привлечь посетителей в будние дни."></textarea>
-<div class="actions"><button class="primary" id="prepare">Подготовить приказ</button><button class="secondary" id="clear">Очистить</button></div>
-<div class="preview" id="preview" aria-live="polite"><strong>Черновик приказа готов к проверке</strong><p id="previewText"></p><div class="notice">Пока это локальная подготовка черновика. Приказ не отправлен AI и работа не запущена: серверный API и AI-ключ ещё не подключены.</div></div>
+<div class="actions"><button class="primary" id="prepare">Отправить директору</button><button class="secondary" id="clear">Очистить</button></div>
+<div class="preview" id="preview" aria-live="polite"><strong id="previewTitle">Ответ AI-директора</strong><p id="previewText"></p><div class="actions"><button class="primary" id="approve" hidden>Подтвердить и выполнить</button></div><div class="notice" id="apiNotice">Для работы сначала разверни Worker и задай секреты по инструкции API-SETUP.md. Токен хранится только в памяти этой страницы.</div></div>
 </section>
 <aside class="panel">
 <h3>Состояние системы</h3><p class="sub">Текущий этап разработки</p>
@@ -58,18 +62,67 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 <div class="steps"><div class="step"><b>1. Интерфейс</b><p>Командный центр, выбор специалиста, проверка приказа.</p></div><div class="step"><b>2. Сервер и AI-мозг</b><p>Защищённый API, секреты провайдера, журнал заданий.</p></div><div class="step"><b>3. Подключение команды</b><p>AI-директор и два специалиста: тесты качества и первые реальные клиентские задачи.</p></div></div>
 </section>
 </div>
-<footer>FLIXO COMMAND CENTER · Prototype 0.2 · Модули команды подготовлены; серверное исполнение не подключено</footer>
+<footer>FLIXO COMMAND CENTER · Prototype 0.3 · API-подключение настраивается владельцем</footer>
 </div>
 <script>
-const agentNames={director:"AI-директор (проектируемый модуль)",social:"Social Media Content Planner",product:"Product Description Writer"};
-const command=document.getElementById("command"),agent=document.getElementById("agent"),preview=document.getElementById("preview"),previewText=document.getElementById("previewText");
-document.getElementById("prepare").addEventListener("click",()=>{
+let currentPlan=null;
+const command=document.getElementById("command");
+const preview=document.getElementById("preview");
+const previewText=document.getElementById("previewText");
+const previewTitle=document.getElementById("previewTitle");
+const approve=document.getElementById("approve");
+const apiNotice=document.getElementById("apiNotice");
+function config(){
+ const base=document.getElementById("apiBase").value.trim().replace(/\\/$/,"");
+ const token=document.getElementById("ownerToken").value;
+ if(!base||!token) throw new Error("Укажи адрес API и секретный токен владельца.");
+ return {base,token};
+}
+async function api(path,payload){
+ const {base,token}=config();
+ const response=await fetch(base+path,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:JSON.stringify(payload)});
+ const data=await response.json().catch(()=>({error:"Сервер вернул не JSON."}));
+ if(!response.ok) throw new Error(data.error||data.message||("HTTP "+response.status));
+ return data;
+}
+document.getElementById("prepare").addEventListener("click",async()=>{
  const value=command.value.trim();
  if(!value){command.focus();return}
- previewText.textContent="Получатель: "+agentNames[agent.value]+"\n\nПриказ:\n"+value+"\n\nСтатус: подготовлен локальный черновик; не отправлен.";
- preview.classList.add("show");
+ preview.classList.add("show");approve.hidden=true;currentPlan=null;
+ previewTitle.textContent="Отправляем приказ AI-директору…";previewText.textContent="Ждём ответ сервера.";
+ try{
+  const result=await api("/api/command",{command:value,language:"ru"});
+  if(!result.ok) throw new Error(result.error||result.message||result.status||"Не удалось получить план.");
+  currentPlan=result.plan||null;
+  previewTitle.textContent="Предложение AI-директора";
+  previewText.textContent=JSON.stringify(currentPlan||result,null,2);
+  if(currentPlan && (currentPlan.specialistId==="pilot-002"||currentPlan.specialistId==="pilot-004") && currentPlan.taskBrief){
+    approve.hidden=false;
+    apiNotice.textContent="Проверь предложение. Нажатие «Подтвердить и выполнить» запустит выбранный сценарий и вернёт черновик на проверку.";
+  }else{
+    apiNotice.textContent="Директор не выбрал доступного специалиста. Уточни приказ; выполнение не запускалось.";
+  }
+ }catch(error){
+  previewTitle.textContent="Не удалось обработать приказ";
+  previewText.textContent=error.message;
+  apiNotice.textContent="Проверь адрес Worker, секреты, токен владельца и настройки доступа.";
+ }
 });
-document.getElementById("clear").addEventListener("click",()=>{command.value="";preview.classList.remove("show");command.focus()});
+approve.addEventListener("click",async()=>{
+ if(!currentPlan)return;
+ approve.disabled=true;previewTitle.textContent="Выполняем утверждённое задание…";
+ try{
+  const result=await api("/api/execute",{approval:true,specialistId:currentPlan.specialistId,brief:currentPlan.taskBrief,language:"ru"});
+  previewTitle.textContent="Результат специалиста — проверь перед использованием";
+  previewText.textContent=JSON.stringify(result,null,2);
+  apiNotice.textContent="Результат создан. Он не опубликован и не отправлен клиентам.";
+  approve.hidden=true;
+ }catch(error){
+  previewTitle.textContent="Ошибка выполнения";
+  previewText.textContent=error.message;
+ }finally{approve.disabled=false}
+});
+document.getElementById("clear").addEventListener("click",()=>{command.value="";preview.classList.remove("show");currentPlan=null;approve.hidden=true;command.focus()});
 </script>
 </body>
 </html>
