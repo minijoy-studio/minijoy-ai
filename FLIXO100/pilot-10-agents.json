@@ -4,8 +4,8 @@
   "status": "pilot_blueprints_created_not_live",
   "goal": {
     "pilotAgents": 10,
-    "targetRevenuePerAgentPerDayUsd": 1,
-    "note": "A target only. No revenue is earned until a real customer buys and pays for a delivered service."
+    "targetRevenuePerAgentPerDayUsd": 10,
+    "note": "A minimum daily gross-revenue target, not a guarantee. Revenue counts only after a real customer pays for a delivered service. Track provider costs, fees, refunds, taxes, and net profit separately. The firstOfferUsd values are pilot test prices and are not the daily revenue target."
   },
   "operatingRules": {
     "sharedBrain": true,
@@ -24,7 +24,12 @@
       "customer": "local small businesses",
       "deliverable": "A short promotional video concept, script, shot list, and editing brief",
       "firstOfferUsd": 5,
-      "workflow": ["collect business brief", "draft script and shot list", "human review", "deliver approved files"],
+      "workflow": [
+        "collect business brief",
+        "draft script and shot list",
+        "human review",
+        "deliver approved files"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -34,7 +39,12 @@
       "customer": "small businesses and creators",
       "deliverable": "A seven-day content calendar with captions and post ideas",
       "firstOfferUsd": 5,
-      "workflow": ["collect audience and goals", "draft calendar", "human review", "deliver content pack"],
+      "workflow": [
+        "collect audience and goals",
+        "draft calendar",
+        "human review",
+        "deliver content pack"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -44,7 +54,12 @@
       "customer": "new businesses",
       "deliverable": "A brand direction brief with logo concepts and usage guidance",
       "firstOfferUsd": 5,
-      "workflow": ["collect brand details", "prepare creative directions", "human review", "deliver brief"],
+      "workflow": [
+        "collect brand details",
+        "prepare creative directions",
+        "human review",
+        "deliver brief"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -54,7 +69,12 @@
       "customer": "online sellers",
       "deliverable": "Clear product descriptions and listing copy",
       "firstOfferUsd": 5,
-      "workflow": ["collect product facts", "draft copy", "fact check", "deliver listing text"],
+      "workflow": [
+        "collect product facts",
+        "draft copy",
+        "fact check",
+        "deliver listing text"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -64,7 +84,12 @@
       "customer": "small online stores",
       "deliverable": "A review of one product listing with concrete improvement suggestions",
       "firstOfferUsd": 5,
-      "workflow": ["collect public listing or seller-provided details", "analyze clarity", "draft improvements", "human review"],
+      "workflow": [
+        "collect public listing or seller-provided details",
+        "analyze clarity",
+        "draft improvements",
+        "human review"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -74,7 +99,12 @@
       "customer": "service businesses",
       "deliverable": "A researched list of relevant public business prospects with source links",
       "firstOfferUsd": 5,
-      "workflow": ["define ideal customer", "research public business information", "verify source links", "deliver prospect list"],
+      "workflow": [
+        "define ideal customer",
+        "research public business information",
+        "verify source links",
+        "deliver prospect list"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -84,7 +114,12 @@
       "customer": "small businesses",
       "deliverable": "Translation and localization of a short business text",
       "firstOfferUsd": 5,
-      "workflow": ["collect source text and target locale", "draft translation", "human quality review", "deliver localized copy"],
+      "workflow": [
+        "collect source text and target locale",
+        "draft translation",
+        "human quality review",
+        "deliver localized copy"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -94,7 +129,12 @@
       "customer": "freelancers and small businesses",
       "deliverable": "A structured short business document or presentation outline",
       "firstOfferUsd": 5,
-      "workflow": ["collect purpose and source facts", "draft structure", "human review", "deliver document content"],
+      "workflow": [
+        "collect purpose and source facts",
+        "draft structure",
+        "human review",
+        "deliver document content"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -104,7 +144,12 @@
       "customer": "small business websites",
       "deliverable": "A basic content and usability review with prioritized fixes",
       "firstOfferUsd": 5,
-      "workflow": ["collect public website URL", "review accessible pages", "record evidence", "deliver findings"],
+      "workflow": [
+        "collect public website URL",
+        "review accessible pages",
+        "record evidence",
+        "deliver findings"
+      ],
       "status": "blueprint_ready"
     },
     {
@@ -114,7 +159,12 @@
       "customer": "video creators",
       "deliverable": "A channel improvement plan with title ideas, descriptions, thumbnail briefs, and publishing schedule",
       "firstOfferUsd": 5,
-      "workflow": ["collect channel and audience details", "review public channel information", "draft growth plan", "human review"],
+      "workflow": [
+        "collect channel and audience details",
+        "review public channel information",
+        "draft growth plan",
+        "human review"
+      ],
       "status": "blueprint_ready"
     }
   ],
