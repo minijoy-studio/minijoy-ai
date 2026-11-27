@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<title>FLIXO Command Center</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#121e30;--panel2:#19283d;--line:#293b53;--text:#f3f6fb;--muted:#9aabc0;--blue:#4b8cff;--green:#35c995;--amber:#f3b64b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0,#172d4d 0,transparent 32%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:24px 18px 56px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#397cff,#7d5cff);display:grid;place-items:center;font-weight:900;font-size:17px}.eyebrow{color:#8fa6c5;font-size:11px;letter-spacing:.16em;font-weight:700}.brand h1{font-size:20px;margin:1px 0}.status{border:1px solid #67522a;color:#ffd27d;background:#302719;border-radius:999px;padding:6px 10px;font-size:12px;white-space:nowrap}
+.hero{margin:18px 0 20px}.hero h2{font-size:clamp(25px,5vw,38px);line-height:1.1;margin:0 0 9px}.hero p{color:var(--muted);margin:0;max-width:720px}
+.grid{display:grid;grid-template-columns:1.45fr .85fr;gap:16px}.panel{background:linear-gradient(180deg,rgba(25,40,61,.97),rgba(18,30,48,.97));border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 12px 35px #0002}.panel h3{margin:0 0 5px;font-size:17px}.sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+label{display:block;font-size:13px;color:#cbd6e5;margin:13px 0 7px}textarea,select{width:100%;background:#0d1726;color:var(--text);border:1px solid #344a66;border-radius:12px;padding:13px;font:inherit;outline:none}textarea{min-height:132px;resize:vertical}textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #4b8cff22}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}button{border:0;border-radius:12px;padding:11px 16px;font-weight:700;font:inherit;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:#263951;color:#e5eefb}.primary:disabled{opacity:.45;cursor:not-allowed}
+.notice{margin-top:14px;border:1px solid #5b4827;background:#2a2419;color:#f2d69e;padding:12px;border-radius:12px;font-size:13px}
+.preview{display:none;margin-top:15px;border:1px solid #35577c;background:#101f33;padding:14px;border-radius:13px}.preview.show{display:block}.preview strong{display:block;margin-bottom:5px}.preview p{margin:0;color:#c1cee0;font-size:13px;white-space:pre-wrap}
+.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#0d1726;border:1px solid var(--line);border-radius:13px;padding:13px}.num{font-size:25px;font-weight:800}.caption{font-size:12px;color:var(--muted)}
+.agent{display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-top:1px solid var(--line)}.agent:first-of-type{border-top:0}.avatar{width:36px;height:36px;border-radius:11px;background:#233e60;display:grid;place-items:center}.agent b{display:block;font-size:14px}.agent small{color:var(--muted)}.tag{display:inline-block;font-size:10px;border-radius:999px;padding:3px 7px;background:#24364b;color:#bfd3ec;margin-top:5px}
+.full{grid-column:1/-1}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.step{background:#0d1726;border:1px solid var(--line);border-radius:13px;padding:13px}.step b{font-size:13px}.step p{font-size:12px;color:var(--muted);margin:5px 0 0}
+footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.steps{grid-template-columns:1fr}.top{align-items:flex-start}.status{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status">● Режим подготовки · API не подключён</div></header>
+<section class="hero"><h2>Твой командный центр</h2><p>Отдавай распоряжения, выбирай специалиста и проверяй план перед выполнением. Все внешние действия и расходы остаются под твоим контролем.</p></section>
+<div class="grid">
+<section class="panel">
+<h3>Новый приказ</h3><p class="sub">Сформулируй задачу обычным языком.</p>
+<label for="agent">Кому направить приказ</label>
+<select id="agent"><option value="director">AI-директор (проектируемый модуль)</option><option value="social">Social Media Content Planner</option><option value="product">Product Description Writer</option></select>
+<label for="command">Текст приказа</label>
+<textarea id="command" maxlength="6000" placeholder="Например: Подготовь контент-план на 7 дней для небольшой кофейни в Бишкеке. Цель — привлечь посетителей в будние дни."></textarea>
+<div class="actions"><button class="primary" id="prepare">Подготовить приказ</button><button class="secondary" id="clear">Очистить</button></div>
+<div class="preview" id="preview" aria-live="polite"><strong>Черновик приказа готов к проверке</strong><p id="previewText"></p><div class="notice">Пока это локальная подготовка черновика. Приказ не отправлен AI и работа не запущена: серверный API и AI-ключ ещё не подключены.</div></div>
+</section>
+<aside class="panel">
+<h3>Состояние системы</h3><p class="sub">Текущий этап разработки</p>
+<div class="statgrid"><div class="stat"><div class="num">10</div><div class="caption">Пилотных ролей описано</div></div><div class="stat"><div class="num">2</div><div class="caption">Рабочих сценария подготовлено в коде</div></div><div class="stat"><div class="num">0</div><div class="caption">Подключённых AI-провайдеров</div></div><div class="stat"><div class="num">0</div><div class="caption">Подтверждённых платных заказов</div></div></div>
+<div class="notice">Показатели отражают состояние разработки, а не выручку.</div>
+</aside>
+<section class="panel">
+<h3>Пилотные специалисты</h3><p class="sub">Первые два сценария, которые подключим после панели.</p>
+<div class="agent"><div class="avatar">✍️</div><div><b>Social Media Content Planner</b><small>Контент-план на 7 дней, подписи, идеи публикаций.</small><div class="tag">Сценарий готов · ждёт AI-подключения</div></div></div>
+<div class="agent"><div class="avatar">🛍️</div><div><b>Product Description Writer</b><small>Названия и описания товаров на основе проверенных фактов.</small><div class="tag">Сценарий готов · ждёт AI-подключения</div></div></div>
+</section>
+<section class="panel">
+<h3>Контроль владельца</h3><p class="sub">Что требует твоего разрешения.</p>
+<div class="agent"><div class="avatar">✓</div><div><b>Черновики и планы</b><small>Можно готовить и проверять.</small></div></div>
+<div class="agent"><div class="avatar">🔒</div><div><b>Платежи и расходы</b><small>Только после твоего явного подтверждения.</small></div></div>
+<div class="agent"><div class="avatar">🔒</div><div><b>Публикации и сообщения клиентам</b><small>Не выполняются автоматически.</small></div></div>
+</section>
+<section class="panel full">
+<h3>Путь к запуску</h3><p class="sub">Панель управления — первый этап. Затем подключим исполнение приказов.</p>
+<div class="steps"><div class="step"><b>1. Интерфейс</b><p>Командный центр, выбор специалиста, проверка приказа.</p></div><div class="step"><b>2. Сервер и AI-мозг</b><p>Защищённый API, секреты провайдера, журнал заданий.</p></div><div class="step"><b>3. Два специалиста</b><p>Подключение, тесты качества и первые реальные клиентские задачи.</p></div></div>
+</section>
+</div>
+<footer>FLIXO COMMAND CENTER · Prototype 0.1 · Управление и исполнение пока не подключены</footer>
+</div>
+<script>
+const agentNames={director:"AI-директор (проектируемый модуль)",social:"Social Media Content Planner",product:"Product Description Writer"};
+const command=document.getElementById("command"),agent=document.getElementById("agent"),preview=document.getElementById("preview"),previewText=document.getElementById("previewText");
+document.getElementById("prepare").addEventListener("click",()=>{
+ const value=command.value.trim();
+ if(!value){command.focus();return}
+ previewText.textContent="Получатель: "+agentNames[agent.value]+"\n\nПриказ:\n"+value+"\n\nСтатус: подготовлен локальный черновик; не отправлен.";
+ preview.classList.add("show");
+});
+document.getElementById("clear").addEventListener("click",()=>{command.value="";preview.classList.remove("show");command.focus()});
+</script>
+</body>
+</html>
