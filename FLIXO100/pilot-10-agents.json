@@ -1,0 +1,130 @@
+{
+  "product": "FLIXO 1000 AI",
+  "pilotVersion": "1.0.0",
+  "status": "pilot_blueprints_created_not_live",
+  "goal": {
+    "pilotAgents": 10,
+    "targetRevenuePerAgentPerDayUsd": 1,
+    "note": "A target only. No revenue is earned until a real customer buys and pays for a delivered service."
+  },
+  "operatingRules": {
+    "sharedBrain": true,
+    "separateAgentRoles": true,
+    "humanApprovalRequired": true,
+    "mayContactCustomersAutomatically": false,
+    "maySpendMoney": false,
+    "mayPublishWithoutApproval": false,
+    "mayClaimUnverifiedResults": false
+  },
+  "agents": [
+    {
+      "id": "pilot-001",
+      "name": "Short Video Ad Creator",
+      "division": "video",
+      "customer": "local small businesses",
+      "deliverable": "A short promotional video concept, script, shot list, and editing brief",
+      "firstOfferUsd": 5,
+      "workflow": ["collect business brief", "draft script and shot list", "human review", "deliver approved files"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-002",
+      "name": "Social Media Content Planner",
+      "division": "social",
+      "customer": "small businesses and creators",
+      "deliverable": "A seven-day content calendar with captions and post ideas",
+      "firstOfferUsd": 5,
+      "workflow": ["collect audience and goals", "draft calendar", "human review", "deliver content pack"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-003",
+      "name": "Logo and Brand Brief Assistant",
+      "division": "design",
+      "customer": "new businesses",
+      "deliverable": "A brand direction brief with logo concepts and usage guidance",
+      "firstOfferUsd": 5,
+      "workflow": ["collect brand details", "prepare creative directions", "human review", "deliver brief"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-004",
+      "name": "Product Description Writer",
+      "division": "writing",
+      "customer": "online sellers",
+      "deliverable": "Clear product descriptions and listing copy",
+      "firstOfferUsd": 5,
+      "workflow": ["collect product facts", "draft copy", "fact check", "deliver listing text"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-005",
+      "name": "Store Listing Optimizer",
+      "division": "ecommerce",
+      "customer": "small online stores",
+      "deliverable": "A review of one product listing with concrete improvement suggestions",
+      "firstOfferUsd": 5,
+      "workflow": ["collect public listing or seller-provided details", "analyze clarity", "draft improvements", "human review"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-006",
+      "name": "Lead Research Assistant",
+      "division": "sales",
+      "customer": "service businesses",
+      "deliverable": "A researched list of relevant public business prospects with source links",
+      "firstOfferUsd": 5,
+      "workflow": ["define ideal customer", "research public business information", "verify source links", "deliver prospect list"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-007",
+      "name": "Translation and Localization Assistant",
+      "division": "translation",
+      "customer": "small businesses",
+      "deliverable": "Translation and localization of a short business text",
+      "firstOfferUsd": 5,
+      "workflow": ["collect source text and target locale", "draft translation", "human quality review", "deliver localized copy"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-008",
+      "name": "Presentation and Document Assistant",
+      "division": "writing",
+      "customer": "freelancers and small businesses",
+      "deliverable": "A structured short business document or presentation outline",
+      "firstOfferUsd": 5,
+      "workflow": ["collect purpose and source facts", "draft structure", "human review", "deliver document content"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-009",
+      "name": "Website Content Auditor",
+      "division": "webops",
+      "customer": "small business websites",
+      "deliverable": "A basic content and usability review with prioritized fixes",
+      "firstOfferUsd": 5,
+      "workflow": ["collect public website URL", "review accessible pages", "record evidence", "deliver findings"],
+      "status": "blueprint_ready"
+    },
+    {
+      "id": "pilot-010",
+      "name": "YouTube Channel Growth Planner",
+      "division": "social",
+      "customer": "video creators",
+      "deliverable": "A channel improvement plan with title ideas, descriptions, thumbnail briefs, and publishing schedule",
+      "firstOfferUsd": 5,
+      "workflow": ["collect channel and audience details", "review public channel information", "draft growth plan", "human review"],
+      "status": "blueprint_ready"
+    }
+  ],
+  "launchChecklist": [
+    "Configure a model provider using server-side secrets",
+    "Add authentication and per-customer usage limits",
+    "Build a task intake and review dashboard",
+    "Test each pilot agent on sample tasks",
+    "Publish clear service descriptions and prices",
+    "Find first customers and obtain approval before any outreach",
+    "Track paid orders, provider costs, refunds, and net profit separately"
+  ]
+}
