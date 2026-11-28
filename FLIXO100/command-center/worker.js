@@ -34,6 +34,29 @@ async function crmRoute(request, env, url, respond) {
   const method = request.method;
   const path = url.pathname;
 
+  if (path === "/api/customers" && method === "POST") {
+    const body = await readJson(request);
+    const fullName = cleanText(body.fullName, 200);
+    const email = cleanText(body.email, 320).toLowerCase();
+    const phone = cleanText(body.phone, 40);
+    if (!fullName || (!email && !phone)) return respond({ ok:false, error:"fullName and at least one of email or phone are required." },400);
+    if (email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return respond({ ok:false, error:"Invalid email address." },400);
+    const id = newId();
+    await db.prepare("INSERT INTO customers (id, full_name, email, phone, company, country_code, consent_status, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+      .bind(id,fullName,email||null,phone||null,cleanText(body.company,200)||null,cleanText(body.countryCode,2).toUpperCase()||null,
+        ["unknown","granted","withdrawn"].includes(body.consentStatus) ? body.consentStatus : "unknown",
+        ["web","referral","partner","direct","import"].includes(body.source) ? body.source : "direct").run();
+    return respond({ ok:true, id, created:true },201);
+  }
+
+  if (path === "/api/customers" && method === "GET") {
+    const limit = Math.min(Math.max(Number(url.searchParams.get("limit") || 25),1),100);
+    const q = cleanText(url.searchParams.get("q") || "",120);
+    const rows = await db.prepare("SELECT id,full_name,email,phone,company,country_code,consent_status,source,created_at FROM customers WHERE (?='' OR full_name LIKE '%'||?||'%' OR email LIKE '%'||?||'%' OR company LIKE '%'||?||'%') ORDER BY created_at DESC LIMIT ?")
+      .bind(q,q,q,q,limit).all();
+    return respond({ ok:true, customers:rows.results || [], limit });
+  }
+
   if (path === "/api/leads" && method === "POST") {
     const body = await readJson(request);
     const need = cleanText(body.needSummary, 4000);
@@ -110,7 +133,7 @@ function corsHeaders(request, env) {
   return {
     "Access-Control-Allow-Origin": origin,
     "Vary": "Origin",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Authorization, Content-Type",
     "Access-Control-Max-Age": "600"
   };
@@ -148,7 +171,7 @@ export default {
       });
     }
 
-    const crmPath = ["/api/leads", "/api/orders", "/api/revenue/ledger"].includes(url.pathname);
+    const crmPath = ["/api/customers", "/api/leads", "/api/orders", "/api/revenue/ledger"].includes(url.pathname);
     const crmMethod = ["GET", "POST"].includes(request.method);
     if (crmPath && crmMethod) {
       if (!authorized(request, env)) return respond({ ok:false, error:"Owner authorization required." },401);
