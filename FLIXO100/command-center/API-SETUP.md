@@ -19,3 +19,15 @@ All protected endpoints require `Authorization: Bearer <FLIXO_OWNER_TOKEN>` and 
 
 ## Important scope
 This backend creates and tracks orders, persists proposals and results, and records payment statuses. A real payment gateway, customer-facing checkout, customer accounts, email notifications, automated refunds, and a broader independently staffed specialist team are not included in this iteration. The two existing specialist workflows use the shared AI provider. Do not represent this as a fully launched commercial platform until these integrations and end-to-end tests are complete.
+
+## Isolated preview deployment
+
+Use `wrangler.preview.toml` to deploy a separate Worker named `flixo-command-center-api-preview` against the dedicated preview D1 database. This avoids Cloudflare's shared-preview-secret behavior and does not alter the production Worker.
+
+From `FLIXO100/command-center`:
+1. Apply schema: `npx wrangler d1 migrations apply flixo-command-center-preview --remote --config wrangler.preview.toml`.
+2. Set secrets interactively (never paste values into Git or chat): `npx wrangler secret put FLIXO_OWNER_TOKEN --config wrangler.preview.toml` and `npx wrangler secret put FLIXO_AI_API_KEY --config wrangler.preview.toml`.
+3. Deploy only the preview Worker: `npx wrangler deploy --config wrangler.preview.toml`.
+4. Check `GET /api/health` and verify `databaseConfigured`, `aiConfigured`, and `ownerAuthConfigured` are all true before running authenticated tests.
+
+The preview AI key must be a separately authorized key. Do not copy production secrets into preview. Production is not deployed or migrated by these commands.
