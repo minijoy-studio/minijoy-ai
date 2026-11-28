@@ -24,13 +24,13 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 </head>
 <body>
 <div class="wrap">
-<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status">● Ожидает подключения API</div></header>
+<header class="top"><div class="brand"><div class="logo">FX</div><div><div class="eyebrow">FLIXO GROUP</div><h1>COMMAND CENTER</h1></div></div><div class="status" id="systemStatus">● Проверка соединения…</div></header>
 <section class="hero"><h2>Твой командный центр</h2><p>Отдавай распоряжения, выбирай специалиста и проверяй план перед выполнением. Все внешние действия и расходы остаются под твоим контролем.</p></section>
 <div class="grid">
 <section class="panel">
 <h3>Новый приказ</h3><p class="sub">Сформулируй задачу обычным языком.</p>
 <label for="apiBase">Адрес API командного центра</label>
-<input id="apiBase" type="url" placeholder="https://твой-worker.workers.dev" autocomplete="url" style="width:100%;background:#0d1726;color:var(--text);border:1px solid #344a66;border-radius:12px;padding:13px;font:inherit">
+<input id="apiBase" type="url" value="https://flixo-command-center-api.naizabek87087.workers.dev" autocomplete="url" style="width:100%;background:#0d1726;color:var(--text);border:1px solid #344a66;border-radius:12px;padding:13px;font:inherit">
 <label for="ownerToken">Секрет владельца (FLIXO_OWNER_TOKEN)</label>
 <input id="ownerToken" type="password" placeholder="Вставь секретный токен" autocomplete="off" style="width:100%;background:#0d1726;color:var(--text);border:1px solid #344a66;border-radius:12px;padding:13px;font:inherit">
 <label for="agent">Получатель приказа</label>
@@ -42,7 +42,7 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 </section>
 <aside class="panel">
 <h3>Состояние системы</h3><p class="sub">Текущий этап разработки</p>
-<div class="statgrid"><div class="stat"><div class="num">10</div><div class="caption">Пилотных ролей описано</div></div><div class="stat"><div class="num">2</div><div class="caption">Рабочих сценария подготовлено в коде</div></div><div class="stat"><div class="num">0</div><div class="caption">Подключённых AI-провайдеров</div></div><div class="stat"><div class="num">0</div><div class="caption">Подтверждённых платных заказов</div></div></div>
+<div class="statgrid"><div class="stat"><div class="num">10</div><div class="caption">Пилотных ролей описано</div></div><div class="stat"><div class="num">2</div><div class="caption">Рабочих сценария подготовлено в коде</div></div><div class="stat"><div class="num" id="aiStatus">—</div><div class="caption">Статус подключения AI</div></div><div class="stat"><div class="num" id="dbStatus">—</div><div class="caption">Подключение базы данных</div></div></div>
 <div class="notice">Показатели отражают состояние разработки, а не выручку.</div>
 </aside>
 <section class="panel">
@@ -62,7 +62,7 @@ footer{color:#70839d;font-size:12px;text-align:center;margin-top:22px}
 <div class="steps"><div class="step"><b>1. Интерфейс</b><p>Командный центр, выбор специалиста, проверка приказа.</p></div><div class="step"><b>2. Сервер и AI-мозг</b><p>Защищённый API, секреты провайдера, журнал заданий.</p></div><div class="step"><b>3. Подключение команды</b><p>AI-директор и два специалиста: тесты качества и первые реальные клиентские задачи.</p></div></div>
 </section>
 </div>
-<footer>FLIXO COMMAND CENTER · Prototype 0.3 · API-подключение настраивается владельцем</footer>
+<footer>FLIXO COMMAND CENTER · Preview · действия доступны только после авторизации владельца</footer>
 </div>
 <script>
 let currentPlan=null;
@@ -72,6 +72,9 @@ const previewText=document.getElementById("previewText");
 const previewTitle=document.getElementById("previewTitle");
 const approve=document.getElementById("approve");
 const apiNotice=document.getElementById("apiNotice");
+const systemStatus=document.getElementById("systemStatus");
+async function checkHealth(){try{const base=document.getElementById("apiBase").value.trim().replace(/\\/$/,"");const r=await fetch(base+"/api/health");const d=await r.json();document.getElementById("aiStatus").textContent=d.aiConfigured?"Подключён":"Не настроен";document.getElementById("dbStatus").textContent=d.databaseConfigured?"Подключена":"Нет связи";systemStatus.textContent=d.ready?"● Система готова":"● Сервер отвечает · требуется настройка";systemStatus.style.borderColor=d.ready?"#236b54":"#67522a";systemStatus.style.color=d.ready?"#8ff0c6":"#ffd27d";}catch(e){systemStatus.textContent="● Сервер недоступен";document.getElementById("aiStatus").textContent="—";document.getElementById("dbStatus").textContent="—";}}
+checkHealth();
 function config(){
  const base=document.getElementById("apiBase").value.trim().replace(/\/$/,"");
  const token=document.getElementById("ownerToken").value;
