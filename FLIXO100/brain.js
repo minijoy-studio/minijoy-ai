@@ -26,7 +26,7 @@ export function buildBrainMessages(task, language = "ru") {
   ].join(" ");
   return [
     { role: "system", content: system },
-    { role: "user", content: `Response language: ${language}.\\nTask/opportunity:\\n${task.trim()}` }
+    { role: "user", content: `Response language: ${language}.\nTask/opportunity:\n${task.trim()}` }
   ];
 }
 
@@ -42,15 +42,18 @@ function extractOutputText(data) {
 }
 
 export async function think(task, env, language = "ru") {
-  if (!env?.FLIXO_AI_API_URL || !env?.FLIXO_AI_API_KEY || !env?.FLIXO_AI_MODEL) {
-    return { ok: false, status: "brain_not_configured", missing: ["FLIXO_AI_API_URL", "FLIXO_AI_API_KEY", "FLIXO_AI_MODEL"], message: "Configure provider settings as runtime secrets." };
+  const apiKey = env?.FLIXO_AI_API_KEY || env?.FLIXO_AI_KEY;
+  const apiUrl = env?.FLIXO_AI_API_URL || "https://api.openai.com/v1/responses";
+  const model = env?.FLIXO_AI_MODEL || "gpt-5.4-mini";
+  if (!apiKey) {
+    return { ok: false, status: "brain_not_configured", missing: ["FLIXO_AI_API_KEY (or legacy FLIXO_AI_KEY)"], message: "Configure the OpenAI API key as a Worker secret." };
   }
   const messages = buildBrainMessages(task, language);
-  const response = await fetch(env.FLIXO_AI_API_URL, {
+  const response = await fetch(apiUrl, {
     method: "POST",
-    headers: { "Authorization": `Bearer ${env.FLIXO_AI_API_KEY}`, "Content-Type": "application/json" },
+    headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: env.FLIXO_AI_MODEL,
+      model,
       input: messages,
       text: { format: { type: "json_object" } },
       temperature: 0.3
