@@ -1,104 +1,28 @@
-/**
- * FLIXO 1000 AI — Cloudflare Worker API.
- *
- * Required Worker secrets/variables:
- *   FLIXO_OWNER_TOKEN (secret, long random token)
- *   FLIXO_AI_API_URL   (variable, e.g. https://api.openai.com/v1/responses)
- *   FLIXO_AI_API_KEY   (secret)
- *   FLIXO_AI_MODEL     (variable supported by provider)
- * Optional:
- *   FLIXO_ALLOWED_ORIGINS (comma-separated exact origins; same-origin requests always allowed)
- *
- * Never place secrets in browser code or Git.
- */
 import { planOwnerCommand, runApprovedAssignment } from "../director.js";
-
-const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" };
-const MAX_BODY = 12000;
-
-function json(data, status = 200, cors = {}) {
-  return new Response(JSON.stringify(data), { status, headers: { ...JSON_HEADERS, ...cors } });
+const H={"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"}, ID=()=>crypto.randomUUID(), MAX=16000;
+const out=(data,status=200,headers={})=>new Response(JSON.stringify(data),{status,headers:{...H,...headers}});
+function cors(req,env){const origin=req.headers.get("Origin");if(!origin)return{};const own=new URL(req.url).origin,allowed=String(env.FLIXO_ALLOWED_ORIGINS||"").split(",").map(x=>x.trim()).filter(Boolean);if(origin!==own&&!allowed.includes(origin))return null;return{"Access-Control-Allow-Origin":origin,"Vary":"Origin","Access-Control-Allow-Methods":"GET, POST, OPTIONS","Access-Control-Allow-Headers":"Authorization, Content-Type","Access-Control-Max-Age":"600"}}
+function auth(req,env){const token=env.FLIXO_OWNER_TOKEN,h=req.headers.get("Authorization")||"";return typeof token==="string"&&token.length>=32&&h.startsWith("Bearer ")&&h.slice(7)===token}
+async function body(req){const s=await req.text();if(s.length>MAX)throw Error("Request body too large.");try{return JSON.parse(s)}catch{throw Error("Request body must be valid JSON.")}}
+function text(v,k,max=4000){if(typeof v!=="string"||!v.trim()||v.length>max)throw Error(k+" is required (max "+max+" characters).");return v.trim()}
+async function audit(db,action,id,details={}){await db.prepare("INSERT INTO audit_events(id,action,entity_type,entity_id,details_json,created_at) VALUES(?,?, 'order',?,?,?)").bind(ID(),action,id,JSON.stringify(details),new Date().toISOString()).run()}
+async function route(req,env){
+ const u=new URL(req.url),p=u.pathname;
+ if(req.method==="GET"&&p==="/api/health")return out({ok:true,service:"FLIXO Command Center API",version:"0.4.0",aiConfigured:!!(env.FLIXO_AI_API_URL&&env.FLIXO_AI_API_KEY&&env.FLIXO_AI_MODEL),ownerAuthConfigured:!!(env.FLIXO_OWNER_TOKEN&&env.FLIXO_OWNER_TOKEN.length>=32),databaseConfigured:!!env.FLIXO_DB});
+ if(req.method==="GET"&&p==="/api/version")return out({ok:true,version:"0.4.0"});
+ if(!p.startsWith("/api/"))return out({ok:false,error:"Not found."},404);
+ if(!auth(req,env))return out({ok:false,error:"Owner authorization required."},401);
+ if(p==="/api/command"&&req.method==="POST"){const b=await body(req);const r=await planOwnerCommand({command:b.command,language:b.language||"ru",env});return out(r,r.ok?200:502)}
+ if(p==="/api/execute"&&req.method==="POST"){const b=await body(req);const r=await runApprovedAssignment({approval:b.approval===true,specialistId:b.specialistId,brief:b.brief,language:b.language||"ru",env});return out(r,r.ok?200:400)}
+ const db=env.FLIXO_DB;if(!db)return out({ok:false,error:"D1 binding FLIXO_DB is missing."},503);
+ if(p==="/api/orders"&&req.method==="GET"){const limit=Math.min(Math.max(Number(u.searchParams.get("limit")||50),1),100);const r=await db.prepare("SELECT id,customer_name,customer_email,service,brief,status,currency,quoted_amount,created_at,updated_at FROM orders ORDER BY created_at DESC LIMIT ?").bind(limit).all();return out({ok:true,orders:r.results||[]})}
+ if(p==="/api/orders"&&req.method==="POST"){const b=await body(req),name=text(b.customerName,"customerName",160),email=text(b.customerEmail,"customerEmail",254).toLowerCase(),service=text(b.service,"service",160),brief=text(b.brief,"brief",6000);if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return out({ok:false,error:"Valid customerEmail required."},400);const id=ID(),now=new Date().toISOString(),amount=Number(b.quotedAmount);await db.prepare("INSERT INTO orders(id,customer_name,customer_email,service,brief,status,currency,quoted_amount,created_at,updated_at) VALUES(?,?,?,?,?,'new',?,?,?,?)").bind(id,name,email,service,brief,String(b.currency||"USD").toUpperCase().slice(0,3),Number.isFinite(amount)&&amount>=0?amount:null,now,now).run();await audit(db,"order.created",id,{service});return out({ok:true,order:{id,customerName:name,customerEmail:email,service,brief,status:"new",createdAt:now}},201)}
+ const m=p.match(/^\/api\/orders\/([0-9a-f-]+)(?:\/(plan|approve|payments))?$/i);if(!m)return out({ok:false,error:"Not found."},404);
+ const [,id,action]=m,order=await db.prepare("SELECT * FROM orders WHERE id=?").bind(id).first();if(!order)return out({ok:false,error:"Order not found."},404);
+ if(!action&&req.method==="GET"){const [t,pay]=await Promise.all([db.prepare("SELECT id,status,specialist_id,proposal_json,result_json,created_at,updated_at FROM tasks WHERE order_id=? ORDER BY created_at DESC").bind(id).all(),db.prepare("SELECT id,amount,currency,provider,reference,status,created_at FROM payment_records WHERE order_id=? ORDER BY created_at DESC").bind(id).all()]);return out({ok:true,order,tasks:t.results||[],payments:pay.results||[]})}
+ if(action==="plan"&&req.method==="POST"){const r=await planOwnerCommand({command:order.brief,language:"ru",env});if(!r.ok||!r.plan)return out({ok:false,error:"AI planning failed.",detail:r},502);const taskId=ID(),now=new Date().toISOString();await db.prepare("INSERT INTO tasks(id,order_id,status,specialist_id,proposal_json,created_at,updated_at) VALUES(?,?,'awaiting_approval',?,?,?,?)").bind(taskId,id,r.plan.specialistId||null,JSON.stringify(r.plan),now,now).run();await db.prepare("UPDATE orders SET status='awaiting_approval',updated_at=? WHERE id=?").bind(now,id).run();await audit(db,"task.proposed",id,{taskId,specialistId:r.plan.specialistId||null});return out({ok:true,taskId,status:"awaiting_approval",plan:r.plan,requiresHumanApproval:true})}
+ if(action==="approve"&&req.method==="POST"){const b=await body(req);if(b.approval!==true)return out({ok:false,error:"Explicit owner approval required."},400);const t=await db.prepare("SELECT * FROM tasks WHERE order_id=? AND status='awaiting_approval' ORDER BY created_at DESC LIMIT 1").bind(id).first();if(!t)return out({ok:false,error:"No task awaiting approval."},409);const plan=JSON.parse(t.proposal_json||"{}");if(!plan.specialistId||!plan.taskBrief)return out({ok:false,error:"Proposal has no executable assignment; clarification required."},409);const r=await runApprovedAssignment({approval:true,specialistId:plan.specialistId,brief:plan.taskBrief,language:"ru",env});if(!r.ok)return out({ok:false,status:"execution_failed",result:r},502);const now=new Date().toISOString();await db.prepare("UPDATE tasks SET status='completed',result_json=?,updated_at=? WHERE id=?").bind(JSON.stringify(r),now,t.id).run();await db.prepare("UPDATE orders SET status='delivered',updated_at=? WHERE id=?").bind(now,id).run();await audit(db,"task.executed_after_owner_approval",id,{taskId:t.id,specialistId:plan.specialistId});return out({ok:true,status:"completed",result:r,externalActionTaken:false})}
+ if(action==="payments"&&req.method==="POST"){const b=await body(req),amount=Number(b.amount);if(!Number.isFinite(amount)||amount<=0)return out({ok:false,error:"Positive amount required."},400);const status=["pending","paid","failed","refunded"].includes(b.status)?b.status:"pending",pid=ID(),now=new Date().toISOString();await db.prepare("INSERT INTO payment_records(id,order_id,amount,currency,provider,reference,status,created_at) VALUES(?,?,?,?,?,?,?,?)").bind(pid,id,amount,String(b.currency||order.currency||"USD").toUpperCase().slice(0,3),text(b.provider||"manual","provider",80),String(b.reference||"").slice(0,180),status,now).run();await audit(db,"payment.recorded",id,{paymentId:pid,status,amount});return out({ok:true,payment:{id:pid,amount,status,createdAt:now},note:"Records payment status only; no card is charged and no gateway is connected."},201)}
+ return out({ok:false,error:"Not found."},404)
 }
-
-function corsHeaders(request, env) {
-  const origin = request.headers.get("Origin");
-  if (!origin) return {};
-  const requestOrigin = new URL(request.url).origin;
-  const allowed = new Set(
-    String(env.FLIXO_ALLOWED_ORIGINS || "")
-      .split(",").map(v => v.trim()).filter(Boolean)
-  );
-  if (origin !== requestOrigin && !allowed.has(origin)) return null;
-  return {
-    "Access-Control-Allow-Origin": origin,
-    "Vary": "Origin",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Authorization, Content-Type",
-    "Access-Control-Max-Age": "600"
-  };
-}
-
-function authorized(request, env) {
-  const expected = env.FLIXO_OWNER_TOKEN;
-  const supplied = request.headers.get("Authorization") || "";
-  return typeof expected === "string" && expected.length >= 32 &&
-    supplied.startsWith("Bearer ") && supplied.slice(7) === expected;
-}
-
-async function readBody(request) {
-  const raw = await request.text();
-  if (raw.length > MAX_BODY) throw new Error("Request body is too large.");
-  return JSON.parse(raw);
-}
-
-export default {
-  async fetch(request, env) {
-    const cors = corsHeaders(request, env);
-    if (cors === null) return json({ ok: false, error: "Origin not allowed." }, 403);
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 204, headers: { ...cors, ...JSON_HEADERS } });
-    }
-
-    const respond = (data, status = 200) => json(data, status, cors);
-    const url = new URL(request.url);
-    if (request.method === "GET" && url.pathname === "/api/health") {
-      return respond({
-        ok: true,
-        service: "FLIXO Command Center API",
-        aiConfigured: Boolean(env.FLIXO_AI_API_URL && env.FLIXO_AI_API_KEY && env.FLIXO_AI_MODEL),
-        ownerAuthConfigured: Boolean(env.FLIXO_OWNER_TOKEN && env.FLIXO_OWNER_TOKEN.length >= 32)
-      });
-    }
-
-    if (request.method !== "POST" || !["/api/command", "/api/execute"].includes(url.pathname)) {
-      return respond({ ok: false, error: "Not found." }, 404);
-    }
-    if (!authorized(request, env)) return respond({ ok: false, error: "Owner authorization required." }, 401);
-    if (!env.FLIXO_AI_API_URL || !env.FLIXO_AI_API_KEY || !env.FLIXO_AI_MODEL) {
-      return respond({ ok: false, status: "brain_not_configured", error: "AI provider secrets/configuration are missing." }, 503);
-    }
-
-    try {
-      const body = await readBody(request);
-      if (url.pathname === "/api/command") {
-        const result = await planOwnerCommand({
-          command: body.command,
-          language: body.language || "ru",
-          env
-        });
-        return respond(result, result.ok ? 200 : 502);
-      }
-
-      const result = await runApprovedAssignment({
-        approval: body.approval === true,
-        specialistId: body.specialistId,
-        brief: body.brief,
-        language: body.language || "ru",
-        env
-      });
-      return respond(result, result.ok ? 200 : 400);
-    } catch (error) {
-      return respond({ ok: false, status: "request_error", error: String(error?.message || error) }, 400);
-    }
-  }
-};
+export default {async fetch(req,env){const ch=cors(req,env);if(ch===null)return out({ok:false,error:"Origin not allowed."},403);if(req.method==="OPTIONS")return new Response(null,{status:204,headers:{...H,...ch}});try{const r=await route(req,env),headers=new Headers(r.headers);for(const [k,v] of Object.entries(ch))headers.set(k,v);return new Response(r.body,{status:r.status,headers})}catch(e){return out({ok:false,status:"request_error",error:String(e?.message||e)},400,ch||{})}}};
