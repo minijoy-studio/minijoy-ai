@@ -1,0 +1,15 @@
+name = "flixo-command-center-api-preview"
+main = "worker.js"
+compatibility_date = "2026-11-27"
+workers_dev = true
+migrations_dir = "migrations"
+
+[[d1_databases]]
+binding = "FLIXO_DB"
+database_name = "flixo-command-center-preview"
+database_id = "7345c3a4-f5a6-44ec-aa11-a68d40315ae4"
+
+[vars]
+FLIXO_ALLOWED_ORIGINS = ""
+FLIXO_AI_API_URL = "https://api.openai.com/v1/responses"
+FLIXO_AI_MODEL = "gpt-5.4-mini"
