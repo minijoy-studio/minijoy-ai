@@ -6,8 +6,8 @@ compatibility_date = "2026-11-27"
 [vars]
 FLIXO_ALLOWED_ORIGINS = ""
 
-# Preview deployments must use the dedicated staging database.
-# Never point preview traffic at the production database.
+# Preview deployments use their own isolated D1 database.
+# Production keeps its existing FLIXO_DB binding unchanged.
 [[previews.d1_databases]]
 binding = "FLIXO_DB"
-database_id = "ea0f97f8-0bae-4602-94db-f732f26b0ce7"
+database_id = "7345c3a4-f5a6-44ec-aa11-a68d40315ae4"
