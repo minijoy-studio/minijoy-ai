@@ -12,10 +12,10 @@ Set Worker secret `FLIXO_OWNER_TOKEN` to a random value of at least 32 character
 - `POST /api/orders` — create order: `customerName, customerEmail, service, brief`, optional `currency, quotedAmount`.
 - `GET /api/orders/:id` — order, tasks and payment records.
 - `POST /api/orders/:id/plan` — ask AI to prepare a proposal; creates an approval-pending task.
-- `POST /api/orders/:id/approve` — execute the pending specialist proposal only with `{ "approval": true }`.
+- `POST /api/orders/:id/approve` — execute the pending specialist proposal only with `{ "approval": true }`. A D1 execution claim blocks duplicate execution of the same task.
 - `POST /api/orders/:id/payments` — record a payment status; this is bookkeeping only and does not charge a card.
 
-All protected endpoints require `Authorization: Bearer <FLIXO_OWNER_TOKEN>` and JSON content type. Responses are JSON. Customer/order/task/payment changes are audit logged.
+All protected endpoints require `Authorization: Bearer <FLIXO_OWNER_TOKEN>` and JSON content type. Responses are JSON. Customer/order/task/payment changes are audit logged. Apply all numbered D1 migrations before testing; migration `0002_execution_claims.sql` adds the duplicate-execution guard.
 
 ## Important scope
 This backend creates and tracks orders, persists proposals and results, and records payment statuses. A real payment gateway, customer-facing checkout, customer accounts, email notifications, automated refunds, and a broader independently staffed specialist team are not included in this iteration. The two existing specialist workflows use the shared AI provider. Do not represent this as a fully launched commercial platform until these integrations and end-to-end tests are complete.
