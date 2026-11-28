@@ -40,7 +40,7 @@ async function crmRoute(request, env, url, respond) {
     const email = cleanText(body.email, 320).toLowerCase();
     const phone = cleanText(body.phone, 40);
     if (!fullName || (!email && !phone)) return respond({ ok:false, error:"fullName and at least one of email or phone are required." },400);
-    if (email && !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) return respond({ ok:false, error:"Invalid email address." },400);
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return respond({ ok:false, error:"Invalid email address." },400);
     const id = newId();
     await db.prepare("INSERT INTO customers (id, full_name, email, phone, company, country_code, consent_status, source) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
       .bind(id,fullName,email||null,phone||null,cleanText(body.company,200)||null,cleanText(body.countryCode,2).toUpperCase()||null,
@@ -166,7 +166,7 @@ export default {
       return respond({
         ok: true,
         service: "FLIXO Command Center API",
-        aiConfigured: Boolean(env.FLIXO_AI_API_URL && env.FLIXO_AI_API_KEY && env.FLIXO_AI_MODEL),
+        aiConfigured: Boolean((env.FLIXO_AI_API_KEY || env.FLIXO_AI_KEY) && (env.FLIXO_AI_API_URL || "https://api.openai.com/v1/responses") && (env.FLIXO_AI_MODEL || "gpt-5.4-mini")),
         ownerAuthConfigured: Boolean(env.FLIXO_OWNER_TOKEN && env.FLIXO_OWNER_TOKEN.length >= 32)
       });
     }
