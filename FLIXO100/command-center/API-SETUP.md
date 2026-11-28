@@ -1,30 +1,21 @@
-# FLIXO Command Center API
+# FLIXO 1000 AI backend API — 0.4.0
 
-Deploy this directory as a separate Cloudflare Worker. Do not replace the MINIJOY Worker.
-
-## Secrets and variables
-
-Set these in Cloudflare Worker Settings → Variables and Secrets:
-
-- Secret `FLIXO_OWNER_TOKEN`: generate a long random token (at least 32 characters).
-- Secret `FLIXO_AI_API_KEY`: API key from the chosen model provider.
-- Variable `FLIXO_AI_API_URL`: OpenAI Responses API URL: `https://api.openai.com/v1/responses`.
-- Variable `FLIXO_AI_MODEL`: model name supported by that provider.
-- Optional variable `FLIXO_ALLOWED_ORIGINS`: comma-separated exact website origins. Same-origin requests are allowed automatically.
-
-Never commit the secrets or put them in the browser.
+## Required Cloudflare configuration
+Bind a D1 database as `FLIXO_DB`. Apply `migrations/0001_initial.sql` to that database.
+Set Worker secret `FLIXO_OWNER_TOKEN` to a random value of at least 32 characters and `FLIXO_AI_API_KEY` to the provider key. Set variables `FLIXO_AI_API_URL` and `FLIXO_AI_MODEL`. Keep secrets out of Git and browser code. Set `FLIXO_ALLOWED_ORIGINS` to exact frontend origins when frontend and API use different origins.
 
 ## Endpoints
+- `GET /api/health` — public configuration health (never returns secret values).
+- `POST /api/command` — authenticated AI Director proposal.
+- `POST /api/execute` — authenticated specialist execution; requires `approval: true`.
+- `GET /api/orders` — owner order list.
+- `POST /api/orders` — create order: `customerName, customerEmail, service, brief`, optional `currency, quotedAmount`.
+- `GET /api/orders/:id` — order, tasks and payment records.
+- `POST /api/orders/:id/plan` — ask AI to prepare a proposal; creates an approval-pending task.
+- `POST /api/orders/:id/approve` — execute the pending specialist proposal only with `{ "approval": true }`.
+- `POST /api/orders/:id/payments` — record a payment status; this is bookkeeping only and does not charge a card.
 
-- `GET /api/health` — reports whether configuration is present (does not reveal secrets).
-- `POST /api/command` — owner-authenticated AI Director proposal.
-- `POST /api/execute` — owner-authenticated execution of one of the two specialist draft workflows; requires explicit `approval: true`.
+All protected endpoints require `Authorization: Bearer <FLIXO_OWNER_TOKEN>` and JSON content type. Responses are JSON. Customer/order/task/payment changes are audit logged.
 
-All requests that create plans or run a specialist require `Authorization: Bearer <FLIXO_OWNER_TOKEN>`.
-
-## Important limitations
-
-- The API creates AI-generated drafts for owner review only.
-- It does not find/contact customers, publish posts, take payments, or guarantee revenue.
-- No durable task database, job queue, billing, or customer accounts are included yet.
-- Use HTTPS. Keep the owner token private and rotate it if exposed.
+## Important scope
+This backend creates and tracks orders, persists proposals and results, and records payment statuses. A real payment gateway, customer-facing checkout, customer accounts, email notifications, automated refunds, and a broader independently staffed specialist team are not included in this iteration. The two existing specialist workflows use the shared AI provider. Do not represent this as a fully launched commercial platform until these integrations and end-to-end tests are complete.
