@@ -1,30 +1,58 @@
-# FLIXO Command Center API
+# FLIXO Command Center API — 0.4.2
 
-Deploy this directory as a separate Cloudflare Worker. Do not replace the MINIJOY Worker.
+This document describes the development Preview only. It is not a Production deployment instruction.
 
-## Secrets and variables
+## Required Cloudflare Preview configuration
 
-Set these in Cloudflare Worker Settings → Variables and Secrets:
+The branch Preview currently uses the D1 binding `FLIXO_DB` pointing to `flixo-command-center-preview`.
 
-- Secret `FLIXO_OWNER_TOKEN`: generate a long random token (at least 32 characters).
-- Secret `FLIXO_AI_API_KEY`: API key from the chosen model provider.
-- Variable `FLIXO_AI_API_URL`: OpenAI Responses API URL: `https://api.openai.com/v1/responses`.
-- Variable `FLIXO_AI_MODEL`: model name supported by that provider.
-- Optional variable `FLIXO_ALLOWED_ORIGINS`: comma-separated exact website origins. Same-origin requests are allowed automatically.
+The Worker requires:
+- Secret `FLIXO_OWNER_TOKEN` (random value, at least 32 characters).
+- Secret `FLIXO_AI_API_KEY` (provider API key).
+- Variable `FLIXO_AI_API_URL` (for OpenAI Responses API: `https://api.openai.com/v1/responses`).
+- Variable `FLIXO_AI_MODEL` (model identifier supported by the provider).
+- Variable `FLIXO_ALLOWED_ORIGINS` (exact frontend origin; currently empty, so a separate browser frontend origin is not allow-listed).
 
-Never commit the secrets or put them in the browser.
+Cloudflare may show encrypted secret names as present while a branch Preview runtime still does not receive the values. The runtime health endpoint is authoritative: it must report `aiConfigured: true`, `ownerAuthConfigured: true`, `databaseConfigured: true`, and `databaseConnected: true`, with `ready: true`.
+
+Never reveal or paste secret values into chat, Git, or browser source. Do not copy Production secrets into Preview.
 
 ## Endpoints
 
-- `GET /api/health` — reports whether configuration is present (does not reveal secrets).
+- `GET /api/health` — public configuration/DB health; never returns secret values.
+- `GET /api/version` — API version.
 - `POST /api/command` — owner-authenticated AI Director proposal.
-- `POST /api/execute` — owner-authenticated execution of one of the two specialist draft workflows; requires explicit `approval: true`.
+- `POST /api/execute` — owner-authenticated specialist execution; requires explicit `approval: true`.
+- `GET /api/orders` — owner-authenticated order list.
+- `POST /api/orders` — owner-authenticated order creation (`customerName, customerEmail, service, brief`; optional `currency, quotedAmount`). **This is not a public customer intake endpoint.**
+- `GET /api/orders/:id` — owner-authenticated order, tasks and payment records.
+- `POST /api/orders/:id/plan` — owner-authenticated AI proposal creation.
+- `POST /api/orders/:id/approve` — owner-authenticated execution of the pending specialist proposal with `{ "approval": true }`; a D1 claim blocks duplicate execution.
+- `POST /api/orders/:id/payments` — owner-authenticated payment-status bookkeeping only; it does not charge a card and no gateway is connected.
 
-All requests that create plans or run a specialist require `Authorization: Bearer <FLIXO_OWNER_TOKEN>`.
+All protected endpoints require `Authorization: Bearer <FLIXO_OWNER_TOKEN>` and JSON content type. Customer/order/task/payment changes are audit logged.
 
-## Important limitations
+## Specialist scope
 
-- The API creates AI-generated drafts for owner review only.
-- It does not find/contact customers, publish posts, take payments, or guarantee revenue.
-- No durable task database, job queue, billing, or customer accounts are included yet.
-- Use HTTPS. Keep the owner token private and rotate it if exposed.
+The current Director can assign only:
+- `pilot-002`: Social Media Content Planner.
+- `pilot-004`: Product Description Writer.
+
+Both workflows use the shared AI provider adapter. They produce drafts for human review and do not contact customers, publish, upload, or spend money. Other divisions listed in the shared brain are planning categories, not callable specialist agents.
+
+## Preview database migrations
+
+The Preview D1 schema includes:
+1. `migrations/0001_initial.sql` — orders, tasks, payment records and audit events.
+2. `migrations/0002_execution_claims.sql` — duplicate-execution guard.
+
+Do not apply these instructions to Production. Do not deploy or migrate Production without the owner's separate explicit approval.
+
+## Release blockers
+
+1. Resolve the Preview runtime mismatch where encrypted secret names appear in the dashboard but health reports AI/auth as not configured.
+2. Verify authenticated AI planning and approved specialist execution end to end.
+3. Implement a safe public customer intake flow with abuse/rate controls and customer-facing status/communications.
+4. Integrate a real payment provider with verified webhooks, reconciliation and refund handling.
+5. Complete security, reliability and end-to-end testing.
+6. Obtain explicit owner approval before any Production deployment.

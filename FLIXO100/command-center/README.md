@@ -1,23 +1,32 @@
-# FLIXO Command Center — prototype 0.1
+# FLIXO Command Center — backend/API 0.4.2 (Preview)
 
-A mobile-friendly Russian-language owner dashboard prototype.
+A Russian-language owner dashboard and Cloudflare Worker API for the FLIXO 1000 AI pilot. This is a development preview, **not a production-ready customer platform**.
 
-## Current functionality
-- Select a recipient (planned AI Director, Social Media Content Planner, Product Description Writer).
-- Enter a natural-language instruction.
-- Prepare and inspect a local draft before execution.
-- Shows honest development status and owner approval boundaries.
+## Implemented in the current branch
 
-## Not connected yet
-- No server API or model provider is connected.
-- Preparing a draft does not send a command or start a job.
-- No authentication, persistent job queue, customer accounts, payment processing, or revenue reporting exists yet.
+- Owner dashboard with live API health display and in-memory owner-token entry.
+- Cloudflare Worker API with health/version endpoints and bearer-token protection for operational endpoints.
+- D1 persistence for orders, tasks, payment records, audit events, and duplicate-execution claims.
+- AI Director proposal flow with mandatory owner approval before specialist execution.
+- Two callable specialist workflows using one shared OpenAI Responses API adapter:
+  - `pilot-002` — Social Media Content Planner (seven-day content calendar).
+  - `pilot-004` — Product Description Writer (product listing draft).
+- Order, task, audit, and payment-status record endpoints.
 
-## Next implementation steps
-1. Add authenticated server endpoint for command submission.
-2. Connect the shared AI brain using server-side secrets only.
-3. Add persistent task queue, audit log, and approval workflow.
-4. Connect and test the first two specialist workflows.
-5. Add real order, cost, refund, and net-profit reporting.
+## Important limitations — not yet delivered
 
-Never put API keys in this static page or commit secrets to Git.
+- Preview health must report `ready: true` before authenticated end-to-end tests. The last verified Preview response reported `aiConfigured: false` and `ownerAuthConfigured: false`, while D1 was connected.
+- The dashboard/API does not yet have a public customer intake or customer account/checkout experience. `POST /api/orders` is owner-authenticated.
+- Payment records are bookkeeping only. No payment gateway is connected and no card is charged.
+- The two specialist workflows share one AI provider; they are not independent model instances or a staffed team.
+- No customer notifications, automated refunds, public publishing, or autonomous external actions are implemented.
+- Full integration, security, load, and end-to-end tests have not passed.
+- Production deployment has not been approved or completed.
+
+## Preview setup
+
+See [API-SETUP.md](./API-SETUP.md). Keep all secrets in Cloudflare Worker secrets; never place credentials in Git, browser code, screenshots, or chat.
+
+## Release gate
+
+Do not describe this project as commercially launched until Preview health is ready, authenticated command and order workflows pass, customer intake and payment gateway are implemented and tested, security checks pass, and Production release is explicitly approved by the owner.

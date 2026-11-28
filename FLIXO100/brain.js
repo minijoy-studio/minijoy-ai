@@ -26,7 +26,7 @@ export function buildBrainMessages(task, language = "ru") {
   ].join(" ");
   return [
     { role: "system", content: system },
-    { role: "user", content: `Response language: ${language}.\\nTask/opportunity:\\n${task.trim()}` }
+    { role: "user", content: `Response language: ${language}.\nTask/opportunity:\n${task.trim()}` }
   ];
 }
 
@@ -38,7 +38,7 @@ function extractOutputText(data) {
       if (content?.type === "output_text" && typeof content.text === "string") parts.push(content.text);
     }
   }
-  return parts.join("\\n").trim();
+  return parts.join("\n").trim();
 }
 
 export async function think(task, env, language = "ru") {
