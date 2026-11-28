@@ -8,8 +8,8 @@ function text(v,k,max=4000){if(typeof v!=="string"||!v.trim()||v.length>max)thro
 async function audit(db,action,id,details={}){await db.prepare("INSERT INTO audit_events(id,action,entity_type,entity_id,details_json,created_at) VALUES(?,?, 'order',?,?,?)").bind(ID(),action,id,JSON.stringify(details),new Date().toISOString()).run()}
 async function route(req,env){
  const u=new URL(req.url),p=u.pathname;
- if(req.method==="GET"&&p==="/api/health"){const aiConfigured=!!(env.FLIXO_AI_API_URL&&env.FLIXO_AI_API_KEY&&env.FLIXO_AI_MODEL),ownerAuthConfigured=!!(env.FLIXO_OWNER_TOKEN&&env.FLIXO_OWNER_TOKEN.length>=32),databaseConfigured=!!env.FLIXO_DB;return out({ok:true,ready:aiConfigured&&ownerAuthConfigured&&databaseConfigured,service:"FLIXO Command Center API",version:"0.4.1",aiConfigured,ownerAuthConfigured,databaseConfigured});}
- if(req.method==="GET"&&p==="/api/version")return out({ok:true,version:"0.4.1"});
+ if(req.method==="GET"&&p==="/api/health"){const aiConfigured=!!(env.FLIXO_AI_API_URL&&env.FLIXO_AI_API_KEY&&env.FLIXO_AI_MODEL),ownerAuthConfigured=!!(env.FLIXO_OWNER_TOKEN&&env.FLIXO_OWNER_TOKEN.length>=32),databaseConfigured=!!env.FLIXO_DB;let databaseConnected=false;if(databaseConfigured){try{await env.FLIXO_DB.prepare("SELECT 1 AS ok").first();databaseConnected=true;}catch{databaseConnected=false;}}return out({ok:true,ready:aiConfigured&&ownerAuthConfigured&&databaseConnected,service:"FLIXO Command Center API",version:"0.4.2",aiConfigured,ownerAuthConfigured,databaseConfigured,databaseConnected});}
+ if(req.method==="GET"&&p==="/api/version")return out({ok:true,version:"0.4.2"});
  if(!p.startsWith("/api/"))return out({ok:false,error:"Not found."},404);
  if(!auth(req,env))return out({ok:false,error:"Owner authorization required."},401);
  if(p==="/api/command"&&req.method==="POST"){const b=await body(req);const r=await planOwnerCommand({command:b.command,language:b.language||"ru",env});return out(r,r.ok?200:502)}
